@@ -7,6 +7,7 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+console.log("sdfasdf");
 
 export default {
   name: 'App',
