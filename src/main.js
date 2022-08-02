@@ -5,7 +5,7 @@ import App from './App.vue'
 import '@/reset.css'
 
 //element
-import { Select, Button, Menu, MenuItem, Submenu, Drawer,Col,Row } from 'element-ui';
+import { Select, Button, Menu, MenuItem, Submenu, Drawer, Col, Row, Avatar } from 'element-ui';
 //ele theme
 import '@/style/theme/index.css'
 //注册element
@@ -17,6 +17,7 @@ Vue.component(Submenu.name, Submenu);
 Vue.component(Drawer.name, Drawer);
 Vue.component(Col.name, Col);
 Vue.component(Row.name, Row);
+Vue.component(Avatar.name, Avatar);
 
 Vue.config.productionTip = false
 

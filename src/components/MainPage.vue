@@ -1,17 +1,11 @@
 <template>
-  <div>
+  <div class="page">
     <MainHeader />
     <MainNav />
 
-    <el-button @click="drawer = true" type="primary" style="margin-left: 16px">
-      点我打开
-    </el-button>
-
-    <el-drawer title="我是标题" :visible.sync="drawer" :direction="direction">
-      <span>我来啦!</span>
-    </el-drawer>
-
-    <router-view></router-view>
+    <div class="view">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -47,5 +41,17 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style lang="less" scoped>
+.page {
+  background-color: aliceblue;
+  height: 100vh;
+  .view {
+    height: calc(100vh - 80px);
+    width: calc(100vw - 240px);
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}
+</style>>
