@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    /* 元素会被撑开，与屏幕一致 */
+    height: 100vh;
+    /* 弹性盒子模型 自适应屏幕 */
+    display: flex;
+    /* 将body中的代码居中显示 */
+    /* 横向居中 */
+    justify-content: center;
+    /* 将body代码中的元素居中显示 */
+    align-items: center;
+}
+
+
+.sign-panel {
+    /* 基本配置 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* 因为每一个输入都放在了div中，div为块元素，所以不用  ——让元素垂直显示*/
+    flex-direction: column;
+    /* 给盒子设置宽高、背景 */
+    height: 600px;
+    width: 425px;
+    background-color: #3b355c;
+    /* 阴影 */
+    box-shadow: 5px 5px 5px rgba(137, 131, 193, 0.5);
+    /* 圆角 */
+    border-radius: 15px;
+    color: #d1d1d1;
+    transition: 0.6s ease;
+
+    /* 溢出隐藏 */
+    overflow: hidden;
+
+    position: relative;
+}
+
+.sign-panel .sign {
+    display: flex;
+    height: 40px;
+    width: 300px;
+
+
+    /* 均匀排列每个元素，为每个元素分配相同空间 */
+    justify-content: space-around;
+    /* 让元素从竖着排列变为横着排列 */
+    flex-direction: column;
+    /* 让其居中 */
+    align-items: center;
+    margin-right: 150px;
+
+
+    /* 当元素之间重叠的时候，z-index 较大的元素会覆盖较小的元素在上层进行显示。例如2会在1上面显示 */
+    /* z-index: 1; */
+
+}
+
+
+.sign-panel .sign .options-line {
+    padding: 45px 0 0 43px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.sign-panel .sign .options-line .options {
+    color: #d1d1d1;
+    font-size: 17px;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    margin-right: 35px;
+    cursor: pointer;
+}
+
+.sign-panel .sign .options-line .option-active {
+    position: relative;
+    font-size: 20px;
+}
+
+.sign-panel .sign .options-line .option-active span::after {
+    content: "";
+    position: absolute;
+    height: 4px;
+    width: 70px;
+    border-radius: 2.5px;
+    background-color: #d1d1d1;
+    bottom: -14px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+}
+
+
+.sign-panel form {
+    width: 380px;
+    height: 520px;
+    display: flex;
+    justify-content: space-around;
+    /* 让元素从竖着排列变为横着排列 */
+    flex-direction: column;
+    /* 让其居中 */
+    align-items: center;
+
+}
+
+/* 图片 */
+.sign-panel form .pic .select-portrait {
+    width: 380px;
+    height: 100px;
+    display: flex;
+    /* 均匀排列每个元素，为每个元素分配相同空间 */
+    justify-content: center;
+
+    /* 让其居中 */
+    align-items: center;
+
+}
+
+.sign-panel form .pic .select-portrait img {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+.sign-panel form .pic .select-portrait a input {
+    display: inline-block;
+    height: 20px;
+    width: 50px;
+    opacity: 0;
+
+    z-index: 1;
+}
+
+/* 性别、班级 */
+.sign-panel form .inputBasic {
+
+    height: 41px;
+    width: 300px;
+    display: flex;
+    /* 均匀排列每个元素，为每个元素分配相同空间 */
+    justify-content: center;
+    /* 让元素从竖着排列变为横着排列 */
+    flex-direction: clone;
+    /* 让其居中 */
+    align-items: center;
+}
+
+div>input {
+    display: flex;
+    /* 均匀排列每个元素，为每个元素分配相同空间 */
+    justify-content: center;
+    /* 让元素从竖着排列变为横着排列 */
+    align-items: center;
+
+    width: 144px;
+    height: 41px;
+    font-size: 10px;
+    margin: 0px 6px;
+    padding: 0 20px;
+
+    color: white;
+    background-color: #3b355c;
+
+
+    border: solid;
+    border-radius: 20px;
+    border-color: rgb(255, 255, 255);
+    border-width: 1px;
+
+    /* text-align: center; */
+
+
+}
+
+
+
+/* 输入框 */
+
+.sign-panel form .inputBox {
+    height: 41px;
+    width: 300px;
+    font-size: 10px;
+
+    margin: 15px 0 0 0;
+    border-radius: 20px;
+    border: 1px solid rgb(255, 255, 255);
+
+    background-color: #3b355c;
+
+    letter-spacing: 2px;
+    padding: 0 20px;
+    color: white;
+
+    /* text-align: center; */
+
+}
+
+/* 返回登陆 */
+.sign-panel form p {
+    height: 41px;
+    width: 300px;
+
+
+
+    text-decoration: none;
+
+    margin: 0 0 -10px;
+
+}
+
+.sign-panel form p a {
+
+    text-decoration: none;
+    color: #d1d1d1;
+    font-size: 5px;
+
+    padding-left: 10px;
+
+
+}
+
+
+
+
+/* 注册按钮 */
+.sign-panel form .registBox {
+    width: 300px;
+    height: 57px;
+    display: flex;
+    /* 均匀排列每个元素，为每个元素分配相同空间 */
+    justify-content: space-around;
+    /* 让元素从竖着排列变为横着排列 */
+    flex-direction: clone;
+    /* 让其居中 */
+    align-items: center;
+
+    /* 设置位置 */
+    margin: 0 0 0 0;
+
+
+    /* 设置字体 */
+    font-size: 20px;
+    color: white;
+    letter-spacing: 2px;
+
+
+    /* 设置边框 */
+    border-radius: 30px;
+    border: none;
+    background-color: #52318b;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+
+
+}
