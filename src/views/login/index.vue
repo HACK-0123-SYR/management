@@ -21,9 +21,9 @@
 
 
 <script>
-  import { ref } from 'vue'
-  import { login } from '../request/index.js'
-  import { useStore } from 'vuex'
+  // import { ref } from 'vue'
+  // import { login } from '../request/index.js'
+  // import { useStore } from 'vuex'
     
 </script>
 

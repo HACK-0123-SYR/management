@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Login> </Login>
-    <router-view/>
+    <router-view></router-view>
     <!-- <MainPage /> -->
   </div>
 </template>
@@ -11,7 +11,7 @@ import Login from "./views/login/index.vue";
 import MainPage from '@/components/MainPage.vue'
   export default {
 		name:'App',
-		components:{ Login,MainPage}
+		components:{ Login,MainPage }
 	}
 </script>
 <style>

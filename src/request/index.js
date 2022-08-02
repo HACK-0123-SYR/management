@@ -37,5 +37,5 @@ request.interceptors.response.use(res => {
 })
 
 export {
-    request
+    request,
 }
