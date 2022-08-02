@@ -1,19 +1,21 @@
 <template>
   <div id="app">
-    <Login> </Login>
-    <router-view/>
-    <!-- <MainPage /> -->
+    <MainPage />
   </div>
 </template>
+
 <script>
-import Login from "./views/login/index.vue";
-// import Login from './views/login/index.vue'
 import MainPage from '@/components/MainPage.vue'
-  export default {
-		name:'App',
-		components:{ Login,MainPage}
-	}
+
+
+export default {
+  name: 'App',
+  components: {
+    MainPage
+  }
+}
 </script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
