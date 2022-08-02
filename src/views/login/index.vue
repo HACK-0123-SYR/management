@@ -1,21 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form ref="formRef" :model="form" class="login-form" :rules="rules">
-      <div class="title-container">
-        <h3 class="title">用户登录</h3>
-      </div>
-      <el-form-item>
-        <el-icon :size="20" class="svg-container"></el-icon>
-          <edit />
-        <el-input v-model="form.username"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-icon :size="20" class="svg-container"></el-icon>
-          <edit />
-        <el-input v-model="form.username"></el-input>
-      </el-form-item>
-      <el-button type="primary" class="login-button" >登录</el-button>
-    </el-form>
+
   </div>
 </template>
 
