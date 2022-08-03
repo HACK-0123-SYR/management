@@ -2,41 +2,27 @@
   <div class="nav">
     <div class="state-panel">
       <div class="avatar">
-        <img src="@/assets/UI/person/portrait1.png">
+        <img :src="teacherInfo.portrait">
       </div>
-      <span class="name">Zireael</span>
-      <span class="other">Always & Forever</span>      
+      <span class="name">{{teacherInfo.name}}</span>
+      <span class="other">{{teacherInfo.email}}</span>      
     </div>
     <el-menu
-      default-active="2"
+      default-active="1"
       class="el-menu-vertical-demo"
-      background-color="#9d88bc"
-      text-color="#fff"
+      background-color="#d6cfe2"
+      text-color="#616161"
       active-text-color="#5318a9"
     >
-      <el-submenu index="1">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
-        </template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
+      <el-menu-item index="1">
+        <i class="el-icon-s-shop"></i>
+        <span slot="title">导航一</span>
+      </el-menu-item>
       <el-menu-item index="2">
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </el-menu-item>
-      <el-menu-item index="3" disabled>
+      <el-menu-item index="3">
         <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
       </el-menu-item>
@@ -49,6 +35,8 @@
 </template>
 
 <script>
+import { mapState,mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -57,13 +45,22 @@ export default {
       },
     };
   },
+  methods:{
+    ...mapActions(['testToken']),
+  },
+  computed:{
+    ...mapState(['teacherInfo'])
+  },
+  mounted(){
+    this.testToken()
+  }
 };
 </script>
 
 <style lang="less" scoped>
 .nav {
   height: calc(100vh - 120px);
-  background-color: #9d88bc;
+  background-color: #d6cfe2;
   width: 200px;
   margin: 20px 20px 0 20px;
   border-radius: 10px;
@@ -80,6 +77,7 @@ export default {
       border-radius: 50%;
       background-color: #000;
       margin-top: 35px;
+      overflow: hidden;
       img{
         display: block;
         height: 100%;
@@ -90,12 +88,12 @@ export default {
       display: block;
     }
     .name{
-      color: #fff;
+      color: #ededf5;
       font-size: 15px;
       margin-top: 25px;
     }
     .other{
-      color: rgb(202, 202, 202);
+      color: #ededf5;
       font-size: 13px;
       margin-top: 10px;
     }

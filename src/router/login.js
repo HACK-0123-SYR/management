@@ -9,7 +9,12 @@ const routes = [
     path: '/index',
     name: 'Login',
     component: () => import('../views/login')
-  }
+  },
+  {
+    path: '/studentList',
+    name: 'studentList',
+    component: () => import('@/components/StudentList.vue')
+  },
 ]
 
 const router = new VueRouter({

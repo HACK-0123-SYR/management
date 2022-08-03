@@ -13,6 +13,7 @@
 import { request } from "@/request/index.js";
 import MainHeader from "@/components/MainHeader.vue";
 import MainNav from "@/components/MainNav.vue";
+// import StudentList from "./StudentList.vue";
 
 export default {
   components: {
@@ -27,7 +28,7 @@ export default {
   },
   mounted() {
     // request({
-    //   url: "/student/testToken",
+    //   url: "/teacher/testToken",
     //   method: "POST",
     // }).then(
     //   (res) => {
@@ -43,7 +44,7 @@ export default {
 
 <style lang="less" scoped>
 .page {
-  background-color: aliceblue;
+  background-color: #ededf5;
   height: 100vh;
   .view {
     height: calc(100vh - 80px);
@@ -52,6 +53,7 @@ export default {
     position: absolute;
     right: 0;
     bottom: 0;
+    overflow: auto;
   }
 }
 </style>>
