@@ -5,7 +5,7 @@
         <el-tab-pane :label="c" :name="c" v-for="c in classSet" :key="c"></el-tab-pane>   
       </el-tabs>
       <el-table
-        :data="tableData"
+        :data="studentList"
         height="100%"
         style="width: 100%"
         :row-class-name="tableRowClassName"
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       activeName: "",
-      tableData: [],
+      studentList: [],
     };
   },
   computed:{
@@ -53,7 +53,10 @@ export default {
     handleClick(tab, event) {
       this.getStudent(this.activeName)
     },
-    ...mapActions(["getStudent"]),
+    getStudent(theClass){
+      this.studentList = this.classMap.get(theClass)
+    },
+    ...mapActions([]),
   },
   mounted() {
     // this.$nextTick(()=>{

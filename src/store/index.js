@@ -9,7 +9,6 @@ export default new Vuex.Store({
   state: {
     teacherInfo: {},
     classMap: new Map(),
-    studentList: [],
   },
   getters: {
   },
@@ -60,9 +59,6 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    getStudent: async (context, theClass) => {
-      console.log();
-    }
   },
   modules: {
   }
