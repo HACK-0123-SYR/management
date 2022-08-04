@@ -11,7 +11,7 @@
       </el-tabs>
       <el-table
         :data="studentList"
-        height="95%"
+        height="93%"
         style="width: 100%"
         :row-class-name="tableRowClassName"
       >
