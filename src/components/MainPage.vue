@@ -55,8 +55,8 @@ export default {
 
 <style lang="less" scoped>
 .page {
-  // background: linear-gradient(180deg, #e0ecff, #f6e3ff 20%, #fcfdff 60%, #f6e3ff);
-  background: linear-gradient(155deg, #e0ffe2,#faffe0, #ffede3, #facffa, #bdccf8);
+  background: linear-gradient(180deg, #e0ecff, #f6e3ff 20%, #fcfdff 60%, #f6e3ff);
+  // background: linear-gradient(155deg, #e0ffe2,#faffe0, #ffede3, #facffa, #bdccf8);
   height: 100vh;
   .client {
     background: linear-gradient(130deg, #e0ecff, #dfccfc);

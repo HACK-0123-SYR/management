@@ -58,10 +58,13 @@ export default {
 
   .menu{
     position: relative;
-    top: 90px;
+    // top: 90px;
+    padding-top: 80px;
     width: 100%;
+    height: 100%;
     .item{
       height: 70px;
+      line-height: 70px;
       font-size: 16px;
       i{
         transform: scale(1.4);

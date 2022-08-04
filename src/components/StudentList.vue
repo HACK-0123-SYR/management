@@ -91,9 +91,9 @@ export default {
 .wrapper {
   height: 100%;
   width: 100%;
-  background-color: #fff;
+  // background-color: #aaa;
   position: relative;
-  padding: 30px;
+  // padding: 30px;
   box-sizing: border-box;
   // padding-bottom: 30px;
   .main {
@@ -103,7 +103,7 @@ export default {
     background-color: #fff;
     position: relative;
     margin: 0 auto;
-    border-radius: 10px;
+    // border-radius: 10px;
     overflow: hidden;
     box-sizing: border-box;
     .el-table {
