@@ -15,6 +15,15 @@ const routes = [
     name: 'studentList',
     component: () => import('@/components/StudentList.vue')
   },
+  {
+    path: '/student',
+    name: 'student',
+    component: () => import('@/components/Student.vue')
+  }
+  // {
+  //   path: '*',
+  //   redirect: '/'
+  // }
 ]
 
 const router = new VueRouter({

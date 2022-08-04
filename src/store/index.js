@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     teacherInfo: {},
     classMap: new Map(),
+    oneStudent:{},
   },
   getters: {
   },
@@ -19,8 +20,11 @@ export default new Vuex.Store({
     THECLASS(state, { classSet }) {
       state.classMap = new Map(classSet)
       // console.log(state.classMap);
-    }
-
+    },
+    CHANGESTU(state,info){
+      // console.log(info);
+      state.oneStudent = info
+    },
   },
   actions: {
     testToken: async ({ commit }) => {

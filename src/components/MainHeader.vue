@@ -9,6 +9,7 @@ export default {};
 <style scoped>
 .menu{
   height: 80px;
+  width: 100%;
   background-color: #d6cfe2;
 }
 </style>
