@@ -59,7 +59,7 @@ export default {
 
 <style lang="less" scoped>
 .nav {
-  height: calc(100vh - 120px);
+  height: calc(100% - 120px);
   background-color: #d6cfe2;
   width: 200px;
   margin: 20px 20px 0 20px;
