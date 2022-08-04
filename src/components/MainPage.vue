@@ -13,6 +13,7 @@
 import { request } from "@/request/index.js";
 import MainHeader from "@/components/MainHeader.vue";
 import MainNav from "@/components/MainNav.vue";
+import { mapActions } from 'vuex';
 // import StudentList from "./StudentList.vue";
 
 export default {
@@ -26,7 +27,11 @@ export default {
       direction: "ltr",
     };
   },
+  methods:{
+    ...mapActions(["getAllClass"])
+  },
   mounted() {
+    this.getAllClass()
     // request({
     //   url: "/teacher/testToken",
     //   method: "POST",

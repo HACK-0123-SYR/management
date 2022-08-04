@@ -2,11 +2,7 @@
   <div class="wrapper">
     <div class="main">
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="用户管理" name="first"></el-tab-pane>
-        <el-tab-pane label="配置管理" name="second"></el-tab-pane>
-        <el-tab-pane label="角色管理" name="third"></el-tab-pane>
-        <el-tab-pane label="定时任务补偿" name="fourth"></el-tab-pane
-        >
+        <el-tab-pane :label="c" :name="c" v-for="c in classSet" :key="c"></el-tab-pane>   
       </el-tabs>
       <el-table
         :data="tableData"
@@ -30,93 +26,20 @@ import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
-      activeName: "second",
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-      ],
+      activeName: "",
+      tableData: [],
     };
   },
   computed:{
-    ...mapState('classSet')
+    ...mapState(['classMap']),
+    classSet(){
+      let mapIterator = this.classMap.keys()
+      let classSet = []
+      for(let  i = mapIterator.next();!i.done;i = mapIterator.next()){
+        classSet.push(i.value)
+      }
+      return classSet
+    }
   },
   methods: {
     tableRowClassName({ row, rowIndex }) {
@@ -128,12 +51,14 @@ export default {
       return "";
     },
     handleClick(tab, event) {
-      console.log(tab, event);
+      this.getStudent(this.activeName)
     },
-    ...mapActions(["getAllClass","getStudent"]),
+    ...mapActions(["getStudent"]),
   },
   mounted() {
-    this.getAllClass();
+    // this.$nextTick(()=>{
+    //   console.log(this.classMap);
+    // })
   },
 };
 </script>

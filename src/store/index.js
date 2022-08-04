@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     teacherInfo: {},
-    classSet: [],
+    classMap: new Map(),
     studentList: [],
   },
   getters: {
@@ -18,7 +18,8 @@ export default new Vuex.Store({
       state.teacherInfo = data
     },
     THECLASS(state, { classSet }) {
-      state.classSet = classSet
+      state.classMap = new Map(classSet)
+      // console.log(state.classMap);
     }
 
   },
@@ -47,6 +48,7 @@ export default new Vuex.Store({
           url: "/teacher/getAllClass",
           method: "GET",
         })
+        // console.log(res);
         if (res.data.code == 200) {
           //拿到教师所有教课的班级
           commit('THECLASS', res.data.data)
@@ -59,7 +61,7 @@ export default new Vuex.Store({
       }
     },
     getStudent: async (context, theClass) => {
-      console.log(theClass);
+      console.log();
     }
   },
   modules: {
