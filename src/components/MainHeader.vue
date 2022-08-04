@@ -23,10 +23,10 @@ export default {
 
 <style lang="less" scoped>
 .menu {
-  height: 100px;
+  height: 80px;
   width: calc(100% - 160px);
   float: right;
-  background-color: #d6cfe2;
+  background-color: #f6f6f6;
   .state-panel {
     height: 100%;
     width: 270px;

@@ -4,25 +4,21 @@
     <el-menu
       default-active="1"
       class="el-menu-vertical-demo menu"
-      background-color="#d6cfe2"
+      background-color="#32324e"
       text-color="#616161"
-      active-text-color="#5318a9"
+      active-text-color="#dadada"
     >
-      <el-menu-item index="1">
+      <el-menu-item class="item" index="1">
         <i class="el-icon-s-shop"></i>
         <span slot="title">导航一</span>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item class="item" index="2">
         <i class="el-icon-menu"></i>
         <span slot="title">导航二</span>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item class="item" index="3">
         <i class="el-icon-document"></i>
         <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
       </el-menu-item>
     </el-menu>
   </div>
@@ -54,7 +50,7 @@ export default {
 <style lang="less" scoped>
 .nav {
   height: calc(100%);
-  background-color: #d6cfe2;
+  background-color: #32324e;
   width: 160px;
   display: flex;
   // margin: 20px 20px 0 20px;
@@ -62,10 +58,16 @@ export default {
 
   .menu{
     position: relative;
-    margin: auto;
-    top: 0;
-    bottom: 0;
+    top: 90px;
     width: 100%;
+    .item{
+      height: 70px;
+      font-size: 16px;
+      i{
+        transform: scale(1.4);
+        margin-right: 10px;
+      }
+    }
   }
 }
 </style>

@@ -91,7 +91,7 @@ export default {
 .wrapper {
   height: 100%;
   width: 100%;
-  background-color: #f5f5fa;
+  background-color: #fff;
   position: relative;
   padding: 30px;
   box-sizing: border-box;
