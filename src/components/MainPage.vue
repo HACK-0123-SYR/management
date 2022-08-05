@@ -33,10 +33,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getAllClass"]),
+    ...mapActions(["getAllClass", "testToken"]),
   },
   mounted() {
     this.getAllClass();
+    this.testToken();
     // request({
     //   url: "/teacher/testToken",
     //   method: "POST",
@@ -54,21 +55,25 @@ export default {
 
 <style lang="less" scoped>
 .page {
-  background: linear-gradient(180deg,#edf4ff,#f9edff,#fcfdff,#f9edff);
+  background: linear-gradient(180deg, #e0ecff, #f6e3ff 20%, #fcfdff 60%, #f6e3ff);
+  // background: linear-gradient(155deg, #e0ffe2,#faffe0, #ffede3, #facffa, #bdccf8);
   height: 100vh;
   .client {
-    background-color: #ededf5;
+    background: linear-gradient(130deg, #e0ecff, #dfccfc);
     position: absolute;
     margin: auto;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    height: 80vh;
+    height: 85vh;
     width: 70vw;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px 3px rgb(118, 118, 118);
     .view {
       height: calc(100% - 80px);
-      width: calc(100% - 240px);
+      width: calc(100% - 160px);
       background-color: #fff;
       position: absolute;
       right: 0;
