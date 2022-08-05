@@ -2,23 +2,22 @@
   <div class="nav">
     
     <el-menu
-      default-active="1"
       class="el-menu-vertical-demo menu"
       background-color="#32324e"
       text-color="#616161"
       active-text-color="#dadada"
     >
-      <el-menu-item class="item" index="1">
-        <i class="el-icon-s-shop"></i>
-        <span slot="title">导航一</span>
+      <el-menu-item class="item" index="1" @click="$router.push({name:'studentList'})">
+        <i class="el-icon-s-custom"></i>
+        <span slot="title">学生管理</span>
       </el-menu-item>
-      <el-menu-item class="item" index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
+      <el-menu-item class="item" index="2" @click="$router.push({name:''})">
+        <i class="el-icon-s-order"></i>
+        <span slot="title">题目管理</span>
       </el-menu-item>
-      <el-menu-item class="item" index="3">
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
+      <el-menu-item class="item" index="3" @click="$router.push({name:''})">
+        <i class="el-icon-s-management"></i>
+        <span slot="title">班级管理</span>
       </el-menu-item>
     </el-menu>
   </div>
