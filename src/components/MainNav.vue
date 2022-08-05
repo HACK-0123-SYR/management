@@ -11,11 +11,11 @@
         <i class="el-icon-s-custom"></i>
         <span slot="title">学生管理</span>
       </el-menu-item>
-      <el-menu-item class="item" index="2" @click="$router.push({name:''})">
+      <el-menu-item class="item" index="2" @click="$router.push({name:'questions'})">
         <i class="el-icon-s-order"></i>
         <span slot="title">题目管理</span>
       </el-menu-item>
-      <el-menu-item class="item" index="3" @click="$router.push({name:''})">
+      <el-menu-item class="item" index="3" @click="$router.push({name:'classes'})">
         <i class="el-icon-s-management"></i>
         <span slot="title">班级管理</span>
       </el-menu-item>

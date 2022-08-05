@@ -19,7 +19,17 @@ const routes = [
     path: '/student',
     name: 'student',
     component: () => import('@/components/Student.vue')
-  }
+  },
+  {
+    path: '/questions',
+    name: 'questions',
+    component: () => import('@/components/Questions.vue')
+  },
+  {
+    path: '/Classes',
+    name: 'classes',
+    component: () => import('@/components/Classes.vue')
+  },
   // {
   //   path: '*',
   //   redirect: '/'
