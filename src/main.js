@@ -6,6 +6,9 @@ import store from './store'
 //reset
 import '@/reset.css'
 
+//阿里云图标
+// import '@/iconfont.css'
+
 //element
 import {
   Select,
