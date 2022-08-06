@@ -8,7 +8,7 @@
           v-for="c in classSet"
           :key="c"
         ></el-tab-pane>
-      </el-tabs>
+     </el-tabs>
       <el-table
         :data="studentList"
         height="93%"

@@ -25,6 +25,8 @@ import {
   TableColumn,
   TabPane,
   Tabs,
+  ElAvatar,
+
 } from 'element-ui';
 //ele theme
 import '@/style/theme/index.css'
@@ -43,7 +45,7 @@ Vue.component(Table.name, Table);
 Vue.component(TableColumn.name, TableColumn);
 Vue.component(TabPane.name, TabPane);
 Vue.component(Tabs.name, Tabs);
-
+Vue.component(ElAvatar.name, ElAvatar);
 Vue.config.productionTip = false
 
 new Vue({
