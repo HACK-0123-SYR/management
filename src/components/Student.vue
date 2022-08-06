@@ -25,7 +25,13 @@
                 }))`,
               }"
             >
-              <circle class="a" cx="23" cy="23" r="20" />
+              <circle
+                class="a"
+                cx="23"
+                cy="23"
+                r="20"
+                style="stroke: #3fb0de"
+              />
             </svg>
           </div>
           <div class="moji">{{ progress }}%</div>
@@ -57,7 +63,7 @@
                 cx="23"
                 cy="23"
                 r="20"
-                style="stroke: #94ffffcc"
+                style="stroke: #6de5c3"
               />
             </svg>
           </div>
@@ -124,7 +130,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["oneStudent"]),
+    ...mapState(["oneStudent", "theme"]),
   },
   methods: {
     back() {
@@ -138,7 +144,9 @@ export default {
       });
     }
 
-    const chart1 = echarts.init(this.$refs.chart1);
+    echarts.registerTheme("theme", this.theme);
+
+    const chart1 = echarts.init(this.$refs.chart1, "theme");
     chart1.setOption({
       tooltip: {
         trigger: "axis",
@@ -213,7 +221,7 @@ export default {
       ],
     });
 
-    const chart2 = echarts.init(this.$refs.chart2);
+    const chart2 = echarts.init(this.$refs.chart2, "theme");
     chart2.setOption({
       title: {
         // text: "Basic Radar Chart",
@@ -238,11 +246,11 @@ export default {
           type: "radar",
           data: [
             {
-              value: [0.52, 0.8, 0.36, 0.23, 0.65,0.63],
+              value: [0.52, 0.8, 0.36, 0.23, 0.65, 0.63],
               name: "Allocated Budget",
             },
             {
-              value: [0.34, 0.65, 0.98, 0.5, 0.4,0.52],
+              value: [0.34, 0.65, 0.98, 0.5, 0.4, 0.52],
               name: "Actual Spending",
             },
           ],
@@ -250,7 +258,7 @@ export default {
       ],
     });
 
-    const chart3 = echarts.init(this.$refs.chart3);
+    const chart3 = echarts.init(this.$refs.chart3, "theme");
     chart3.setOption({
       title: {
         text: "Stacked Line",
