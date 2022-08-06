@@ -3,8 +3,71 @@
     <div class="back-banner">
       <i class="iconfont icon-xiangzuo1" @click="back"></i>
     </div>
+    <div class="datas">
+      <div class="process">
+        <div class="con"><span>学习进度</span></div>
+        <div class="cir">
+          <div class="load-box">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 46 46"
+              class="base"
+            >
+              <circle class="a" cx="23" cy="23" r="20" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 46 46"
+              class="loader"
+              :style="{
+                strokeDashoffset: `calc(-2 * 3.1416 * 20 * (1 - ${
+                  progress / 100
+                }))`,
+              }"
+            >
+              <circle class="a" cx="23" cy="23" r="20" />
+            </svg>
+          </div>
+          <div class="moji">{{ progress }}%</div>
+        </div>
+      </div>
+      <div class="process">
+        <div class="con"><span>正确率</span></div>
+        <div class="cir">
+          <div class="load-box">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 46 46"
+              class="base"
+            >
+              <circle class="a" cx="23" cy="23" r="20" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 46 46"
+              class="loader"
+              :style="{
+                strokeDashoffset: `calc(-2 * 3.1416 * 20 * (1 - ${
+                  rate / 100
+                }))`,
+              }"
+            >
+              <circle
+                class="a"
+                cx="23"
+                cy="23"
+                r="20"
+                style="stroke: #94ffffcc"
+              />
+            </svg>
+          </div>
+          <div class="moji">{{ rate }}%</div>
+        </div>
+      </div>
+    </div>
     <div class="barChart" ref="chart1"></div>
     <div class="radarChart" ref="chart2"></div>
+
     <div class="lineChart" ref="chart3"></div>
     <div class="feedback">
       <div class="title">FEEDBACK</div>
@@ -27,6 +90,7 @@ import {
   DatasetComponent,
   TransformComponent,
   LegendComponent,
+  ToolboxComponent,
 } from "echarts/components";
 // 标签自动布局，全局过渡动画等特性
 import { LabelLayout, UniversalTransition } from "echarts/features";
@@ -41,6 +105,7 @@ echarts.use([
   DatasetComponent,
   TransformComponent,
   LegendComponent,
+  ToolboxComponent,
 
   BarChart,
   RadarChart,
@@ -53,14 +118,17 @@ echarts.use([
 
 export default {
   data() {
-    return {};
+    return {
+      progress: 65,
+      rate: 45,
+    };
   },
   computed: {
     ...mapState(["oneStudent"]),
   },
   methods: {
     back() {
-      this.$router.back()
+      this.$router.back();
     },
   },
   mounted() {
@@ -72,19 +140,75 @@ export default {
 
     const chart1 = echarts.init(this.$refs.chart1);
     chart1.setOption({
-      title: {
-        text: "ECharts 入门示例",
+      tooltip: {
+        trigger: "axis",
+        axisPointer: {
+          type: "shadow",
+        },
       },
-      tooltip: {},
-      xAxis: {
-        data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+      legend: {
+        data: ["Expenses", "Income"],
       },
-      yAxis: {},
-      series: [
+      grid: {
+        left: "3%",
+        right: "4%",
+        bottom: "3%",
+        containLabel: true,
+      },
+      yAxis: [
         {
-          name: "销量",
+          type: "value",
+        },
+      ],
+      xAxis: [
+        {
+          type: "category",
+          axisTick: {
+            show: false,
+          },
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        },
+      ],
+      series: [
+        // {
+        //   name: "Profit",
+        //   type: "bar",
+        //   label: {
+        //     show: true,
+        //     position: "inside",
+        //   },
+        //   emphasis: {
+        //     focus: "series",
+        //   },
+        //   data: [200, 170, 240, 244, 200, 220, 210],
+        // },
+        {
+          name: "Income",
           type: "bar",
-          data: [5, 20, 36, 10, 10, 20],
+          stack: "Total",
+          label: {
+            show: true,
+          },
+          emphasis: {
+            focus: "series",
+          },
+          data: [320, 302, 341, 374, 390, 450],
+          barWidth: "45%",
+          itemStyle: {},
+        },
+        {
+          name: "Expenses",
+          type: "bar",
+          stack: "Total",
+          label: {
+            show: true,
+            position: "left",
+          },
+          emphasis: {
+            focus: "series",
+          },
+          data: [-120, -132, -101, -134, -190, -230],
+          itemStyle: {},
         },
       ],
     });
@@ -156,35 +280,35 @@ export default {
         type: "value",
       },
       series: [
-        {
-          name: "Email",
-          type: "line",
-          stack: "Total",
-          data: [120, 132, 101, 134, 90, 230, 210],
-        },
-        {
-          name: "Union Ads",
-          type: "line",
-          stack: "Total",
-          data: [220, 182, 191, 234, 290, 330, 310],
-        },
-        {
-          name: "Video Ads",
-          type: "line",
-          stack: "Total",
-          data: [150, 232, 201, 154, 190, 330, 410],
-        },
-        {
-          name: "Direct",
-          type: "line",
-          stack: "Total",
-          data: [320, 332, 301, 334, 390, 330, 320],
-        },
+        // {
+        //   name: "Email",
+        //   type: "line",
+        //   stack: "Total",
+        //   data: [120, 132, 101, 134, 90, 230, 210],
+        // },
+        // {
+        //   name: "Union Ads",
+        //   type: "line",
+        //   stack: "Total",
+        //   data: [220, 182, 191, 234, 290, 330, 310],
+        // },
+        // {
+        //   name: "Video Ads",
+        //   type: "line",
+        //   stack: "Total",
+        //   data: [150, 232, 201, 154, 190, 330, 410],
+        // },
+        // {
+        //   name: "Direct",
+        //   type: "line",
+        //   stack: "Total",
+        //   data: [320, 332, 301, 334, 390, 330, 320],
+        // },
         {
           name: "Search Engine",
           type: "line",
           stack: "Total",
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          data: [820, 0, 901, 934, 0, 1330, 1320],
         },
       ],
     });
@@ -197,24 +321,121 @@ export default {
   min-height: 100%;
   width: 100%;
   //   background-color: aqua;
-  padding: 20px;
+  padding: 30px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  .back-banner{
-    height: 35px;
+  & > div {
+    margin-top: 30px;
+  }
+  .back-banner {
+    height: 15px;
     width: 100%;
-    i{
+    margin-top: 0;
+    i {
       cursor: pointer;
     }
   }
+  .datas {
+    width: 45%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .process {
+      position: relative;
+      height: 48%;
+      width: 100%;
+      background-color: rgb(234, 255, 254);
+      border-radius: 10px;
+      display: flex;
+      .con {
+        height: 100%;
+        flex: 4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        span {
+          font-size: 25px;
+          color: #8c8c8e;
+          font-weight: bold;
+        }
+      }
+      .cir {
+        height: 100%;
+        flex: 5;
+        position: relative;
+        .moji {
+          height: 60px;
+          // width: 45px;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+          text-align: center;
+          line-height: 60px;
+          font-size: 40px;
+        }
+        .load-box {
+          height: 200px;
+          max-width: 170px;
+          transition: 0.8s ease;
+          position: absolute;
+          z-index: 5;
+          right: 0;
+          top: -0;
+          left: 0;
+          bottom: 0;
+          margin: auto;
+          svg {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto 0;
+            overflow: hidden;
+            backface-visibility: hidden;
+            circle {
+              overflow: hidden;
+              transition: all 0.2s ease;
+              fill: none;
+              // stroke: #43bcc7b5;
+              stroke-miterlimit: 10;
+              stroke-width: 2px;
+              backface-visibility: hidden;
+              transition: stroke 1.1s ease;
+            }
+          }
+          .base {
+            opacity: 0.5;
+            circle {
+              stroke: #eeeef0;
+            }
+          }
+          .loader {
+            opacity: 1;
+            stroke-dasharray: calc(2 * 3.1416 * 20);
+            transform: rotateZ(-90deg) rotateX(180deg);
+            animation-fill-mode: both;
+            transition: stroke-dashoffset 1s ease;
+            circle {
+              stroke: #f7c5ff;
+              // stroke-width: 3px;
+            }
+          }
+        }
+        animation: enter 1s ease forwards;
+      }
+    }
+  }
+
   .feedback {
     width: 100%;
     height: 320px;
     border-radius: 20px;
     overflow: hidden;
-    margin-top: 30px;
     box-shadow: 0px 0px 10px 2px rgb(223, 223, 223);
     .title {
       height: 70px;
@@ -229,14 +450,14 @@ export default {
   .barChart {
     height: 400px;
     width: 50%;
-    background-color: aliceblue;
+    background-color: rgb(243, 249, 255);
     border-radius: 10px;
     position: relative;
     // margin:0 auto;
   }
   .radarChart {
-    height: 400px;
-    width: 45%;
+    height: 600px;
+    width: 100%;
     border-radius: 10px;
     background-color: aliceblue;
     padding: 30px;
@@ -247,7 +468,6 @@ export default {
     width: 100%;
     background-color: rgb(225, 254, 245);
     border-radius: 20px;
-    margin-top: 30px;
   }
 }
 </style>
