@@ -83,6 +83,8 @@
 
 <script>
 import { mapMutations, mapState } from "vuex";
+//request
+import { request } from "@/request/index.js";
 //echarts
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
 import * as echarts from "echarts/core";
@@ -127,201 +129,212 @@ export default {
     return {
       progress: 65,
       rate: 45,
+      studentInfo: {},
     };
   },
+  props: ["id"],
   computed: {
-    ...mapState(["oneStudentInfo", "oneStudentWeekStatus", "theme"]),
+    ...mapState(["theme"]),
+    // ...mapState(["oneStudentInfo", "oneStudentWeekStatus", "theme"]),
     resCount() {
       let res = [];
-      this.oneStudentWeekStatus.forEach((ele) => {
+      this.studentInfo.weekStatus.forEach((ele) => {
         res.push(ele.resCount);
       });
       return res;
     },
     errCount() {
       let res = [];
-      this.oneStudentWeekStatus.forEach((ele) => {
+      this.studentInfo.weekStatus.forEach((ele) => {
         res.push(-ele.errCount);
       });
       return res;
     },
     grade() {
       let res = [];
-      this.oneStudentWeekStatus.forEach((ele) => {
+      this.studentInfo.weekStatus.forEach((ele) => {
         res.push(ele.grade);
       });
       return res;
     },
   },
   watch: {
-    resCount: {
-      handler(newValue) {
-        console.log(newValue);
-        this.$nextTick(() => {
-          // echarts.registerTheme("theme", this.theme);
-          const chart1 = echarts.init(this.$refs.chart1, "theme");
-          chart1.setOption({
-            tooltip: {
-              trigger: "axis",
-              axisPointer: {
-                type: "shadow",
-              },
-            },
-            legend: {
-              data: ["Expenses", "Income"],
-            },
-            grid: {
-              left: "3%",
-              right: "4%",
-              bottom: "3%",
-              containLabel: true,
-            },
-            yAxis: [
-              {
-                type: "value",
-              },
-            ],
-            xAxis: [
-              {
-                type: "category",
-                axisTick: {
-                  show: false,
-                },
-                data: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-              },
-            ],
-            series: [
-              {
-                name: "Income",
-                type: "bar",
-                stack: "Total",
-                label: {
-                  show: true,
-                },
-                emphasis: {
-                  focus: "series",
-                },
-                data: this.resCount,
-                barWidth: "45%",
-                itemStyle: {},
-              },
-              {
-                name: "Expenses",
-                type: "bar",
-                stack: "Total",
-                label: {
-                  show: true,
-                  position: "left",
-                },
-                emphasis: {
-                  focus: "series",
-                },
-                data: this.errCount,
-                itemStyle: {},
-              },
-            ],
-          });
+    studentInfo(newValue) {
+      console.log(newValue);
+      this.$nextTick(() => {
+        const chart1 = echarts.init(this.$refs.chart1, "theme");
+        const chart3 = echarts.init(this.$refs.chart3, "theme");
+        const chart2 = echarts.init(this.$refs.chart2, "theme");
 
-          const chart2 = echarts.init(this.$refs.chart2, "theme");
-          chart2.setOption({
-            title: {
-              // text: "Basic Radar Chart",
+        chart1.setOption({
+          tooltip: {
+            trigger: "axis",
+            axisPointer: {
+              type: "shadow",
             },
-            legend: {
-              data: ["Allocated Budget", "Actual Spending"],
-            },
-            radar: {
-              // shape: 'circle',
-              indicator: [
-                { name: "Sales", max: 1 },
-                { name: "Administration", max: 1 },
-                { name: "Information Technology", max: 1 },
-                { name: "Customer Support", max: 1 },
-                { name: "Development", max: 1 },
-                { name: "Ser", max: 1 },
-              ],
-            },
-            series: [
-              {
-                name: "Budget vs spending",
-                type: "radar",
-                data: [
-                  {
-                    value: [0.52, 0.8, 0.36, 0.23, 0.65, 0.63],
-                    name: "Allocated Budget",
-                  },
-                  {
-                    value: [0.34, 0.65, 0.98, 0.5, 0.4, 0.52],
-                    name: "Actual Spending",
-                  },
-                ],
-              },
-            ],
-          });
-
-          const chart3 = echarts.init(this.$refs.chart3, "theme");
-          chart3.setOption({
-            title: {
-              text: "Stacked Line",
-            },
-            tooltip: {
-              trigger: "axis",
-            },
-            legend: {
-              data: [
-                "Email",
-                "Union Ads",
-                "Video Ads",
-                "Direct",
-                "Search Engine",
-              ],
-            },
-            grid: {
-              left: "3%",
-              right: "4%",
-              bottom: "3%",
-              containLabel: true,
-            },
-            toolbox: {
-              feature: {
-                saveAsImage: {},
-              },
-            },
-            xAxis: {
-              type: "category",
-              boundaryGap: false,
-              data: ["Sun", "Tue", "Wed", "Thu", "Fri", "Sat", "Mon"],
-            },
-            yAxis: {
+          },
+          legend: {
+            data: ["Expenses", "Income"],
+          },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            containLabel: true,
+          },
+          yAxis: [
+            {
               type: "value",
             },
-            series: [
-              {
-                name: "Search Engine",
-                type: "line",
-                stack: "Total",
-                data: this.grade,
+          ],
+          xAxis: [
+            {
+              type: "category",
+              axisTick: {
+                show: false,
               },
-            ],
-          });
+              data: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            },
+          ],
+          series: [
+            {
+              name: "Income",
+              type: "bar",
+              stack: "Total",
+              label: {
+                show: true,
+              },
+              emphasis: {
+                focus: "series",
+              },
+              data: this.resCount,
+              barWidth: "45%",
+              itemStyle: {},
+            },
+            {
+              name: "Expenses",
+              type: "bar",
+              stack: "Total",
+              label: {
+                show: true,
+                position: "left",
+              },
+              emphasis: {
+                focus: "series",
+              },
+              data: this.errCount,
+              itemStyle: {},
+            },
+          ],
         });
-      },
-      immediate: true,
+        chart2.setOption({
+          title: {
+            // text: "Basic Radar Chart",
+          },
+          legend: {
+            data: ["Allocated Budget", "Actual Spending"],
+          },
+          radar: {
+            // shape: 'circle',
+            indicator: [
+              { name: "Sales", max: 1 },
+              { name: "Administration", max: 1 },
+              { name: "Information Technology", max: 1 },
+              { name: "Customer Support", max: 1 },
+              { name: "Development", max: 1 },
+              { name: "Ser", max: 1 },
+            ],
+          },
+          series: [
+            {
+              name: "Budget vs spending",
+              type: "radar",
+              data: [
+                {
+                  value: [0.52, 0.8, 0.36, 0.23, 0.65, 0.63],
+                  name: "Allocated Budget",
+                },
+                {
+                  value: [0.34, 0.65, 0.98, 0.5, 0.4, 0.52],
+                  name: "Actual Spending",
+                },
+              ],
+            },
+          ],
+        });
+        chart3.setOption({
+          title: {
+            text: "Stacked Line",
+          },
+          tooltip: {
+            trigger: "axis",
+          },
+          legend: {
+            data: [
+              "Email",
+              "Union Ads",
+              "Video Ads",
+              "Direct",
+              "Search Engine",
+            ],
+          },
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            containLabel: true,
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {},
+            },
+          },
+          xAxis: {
+            type: "category",
+            boundaryGap: false,
+            data: ["Sun", "Tue", "Wed", "Thu", "Fri", "Sat", "Mon"],
+          },
+          yAxis: {
+            type: "value",
+          },
+          series: [
+            {
+              name: "Search Engine",
+              type: "line",
+              stack: "Total",
+              data: this.grade,
+            },
+          ],
+        });
+      });
     },
   },
   methods: {
     back() {
       this.$router.back();
     },
-    ...mapMutations(["DestoryInfo"]),
+    async getStuInfo(id) {
+      let res = await request({
+        url: "/teacher/getWeekStatus",
+        method: "POST",
+        data: {
+          id,
+        },
+      });
+      this.studentInfo = res.data.data;
+    },
+    // ...mapMutations(["DestoryInfo"]),
   },
   mounted() {
-    if (!this.oneStudentInfo._id) {
-      this.$router.replace({
-        name: "studentList",
-      });
-    }
+    // if (!this.oneStudentInfo._id) {
+    //   this.$router.replace({
+    //     name: "studentList",
+    //   });
+    // }
     echarts.registerTheme("theme", this.theme);
+    console.log("mounted", this.id);
+
+    this.getStuInfo(this.id);
   },
   beforeDestroy() {
     // this.DestoryInfo()

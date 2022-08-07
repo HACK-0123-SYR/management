@@ -57,9 +57,12 @@ export default {
   methods: {
     feedback(row){
       // console.log(row);
-      this.getStudentData(row)
+      // this.getStudentData(row)
       this.$router.push({
-        name:'student'
+        name:'student',
+        params:{
+          id:row.student_id
+        }
       })
     },
     tableRowClassName({ row, rowIndex }) {
@@ -76,8 +79,8 @@ export default {
     getStudent(theClass) {
       this.studentList = this.classMap.get(theClass);
     },
-    ...mapActions(["getStudentData"]),
-    ...mapMutations(["DestoryInfo"])
+    // ...mapActions(["getStudentData"]),
+    // ...mapMutations(["DestoryInfo"])
   },
   mounted() {
     // this.$nextTick(()=>{
