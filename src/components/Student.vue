@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <div class="back-banner">
+  <div class="back-banner">
       <i class="iconfont icon-xiangzuo1" @click="back"></i>
     </div>
     <div class="datas">
