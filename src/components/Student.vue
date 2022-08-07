@@ -25,7 +25,13 @@
                 }))`,
               }"
             >
-              <circle class="a" cx="23" cy="23" r="20" />
+              <circle
+                class="a"
+                cx="23"
+                cy="23"
+                r="20"
+                style="stroke: #3fb0de"
+              />
             </svg>
           </div>
           <div class="moji">{{ progress }}%</div>
@@ -57,7 +63,7 @@
                 cx="23"
                 cy="23"
                 r="20"
-                style="stroke: #94ffffcc"
+                style="stroke: #6de5c3"
               />
             </svg>
           </div>
@@ -124,7 +130,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["oneStudentInfo", "oneStudentWeekStatus"]),
+    ...mapState(["oneStudentInfo", "oneStudentWeekStatus", "theme"]),
     resCount() {
       let res = [];
       this.oneStudentWeekStatus.forEach((ele) => {
@@ -139,20 +145,21 @@ export default {
       });
       return res;
     },
-    grade(){
-      let res = []
-      this.oneStudentWeekStatus.forEach(ele =>{
-        res.push(ele.grade)
-      })
-      return res
-    }
+    grade() {
+      let res = [];
+      this.oneStudentWeekStatus.forEach((ele) => {
+        res.push(ele.grade);
+      });
+      return res;
+    },
   },
   watch: {
     resCount: {
       handler(newValue) {
         console.log(newValue);
         this.$nextTick(() => {
-          const chart1 = echarts.init(this.$refs.chart1);
+          // echarts.registerTheme("theme", this.theme);
+          const chart1 = echarts.init(this.$refs.chart1, "theme");
           chart1.setOption({
             tooltip: {
               trigger: "axis",
@@ -215,7 +222,7 @@ export default {
             ],
           });
 
-          const chart2 = echarts.init(this.$refs.chart2);
+          const chart2 = echarts.init(this.$refs.chart2, "theme");
           chart2.setOption({
             title: {
               // text: "Basic Radar Chart",
@@ -252,7 +259,7 @@ export default {
             ],
           });
 
-          const chart3 = echarts.init(this.$refs.chart3);
+          const chart3 = echarts.init(this.$refs.chart3, "theme");
           chart3.setOption({
             title: {
               text: "Stacked Line",
@@ -299,7 +306,7 @@ export default {
           });
         });
       },
-      immediate:true
+      immediate: true,
     },
   },
   methods: {
@@ -314,10 +321,11 @@ export default {
         name: "studentList",
       });
     }
+    echarts.registerTheme("theme", this.theme);
   },
-  beforeDestroy(){
+  beforeDestroy() {
     // this.DestoryInfo()
-  }
+  },
 };
 </script>
 
