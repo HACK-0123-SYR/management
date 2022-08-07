@@ -57,7 +57,7 @@ export default {
   methods: {
     feedback(row){
       // console.log(row);
-      this.CHANGESTU(row)
+      this.getStudentData(row)
       this.$router.push({
         name:'student'
       })
@@ -76,14 +76,22 @@ export default {
     getStudent(theClass) {
       this.studentList = this.classMap.get(theClass);
     },
-    ...mapActions([]),
-    ...mapMutations(["CHANGESTU",])
+    ...mapActions(["getStudentData"]),
+    ...mapMutations(["DestoryInfo"])
   },
   mounted() {
     // this.$nextTick(()=>{
     //   console.log(this.classMap);
     // })
   },
+  beforeRouteEnter(to,from,next){
+    // this.DestoryInfo()
+    // console.log(to);
+    // next((vm)=>{
+    //   vm.DestoryInfo()
+    // })
+    next()
+  }
 };
 </script>
 

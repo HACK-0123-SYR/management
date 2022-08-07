@@ -40,4 +40,7 @@ const router = new VueRouter({
   routes
 })
 
+router.afterEach((to,from) =>{
+})
+
 export default router

@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     teacherInfo: {},
     classMap: new Map(),
-    oneStudent:{},
+    oneStudentInfo: {},
+    oneStudentWeekStatus: []
   },
   getters: {
   },
@@ -21,9 +22,15 @@ export default new Vuex.Store({
       state.classMap = new Map(classSet)
       // console.log(state.classMap);
     },
-    CHANGESTU(state,info){
-      // console.log(info);
-      state.oneStudent = info
+    CHANGESTU(state, { oneStudentInfo, oneStudentWeekStatus }) {
+      state.oneStudentInfo = oneStudentInfo
+      state.oneStudentWeekStatus = oneStudentWeekStatus
+    },
+    DestoryInfo(state){
+      state.oneStudentInfo = {}
+      state.oneStudentWeekStatus = []
+      console.log("Destorying");
+      console.log(state.oneStudentInfo,state.oneStudentWeekStatus);
     },
   },
   actions: {
@@ -63,6 +70,26 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
+    getStudentData: async (context, row) => {
+      // console.log(row);
+      try {
+        let res = await request({
+          url: "/teacher/getWeekStatus",
+          method: "POST",
+          data: {
+            id: row.student_id
+          }
+        })
+        if (res.data.code == 200) {
+          context.commit('CHANGESTU', {
+            oneStudentInfo: row,
+            oneStudentWeekStatus: res.data.data,
+          })
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
   modules: {
   }
