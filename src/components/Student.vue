@@ -159,154 +159,157 @@ export default {
     },
   },
   watch: {
-    studentInfo(newValue) {
-      console.log(newValue);
-      this.$nextTick(() => {
-        const chart1 = echarts.init(this.$refs.chart1, "theme");
-        const chart3 = echarts.init(this.$refs.chart3, "theme");
-        const chart2 = echarts.init(this.$refs.chart2, "theme");
+    studentInfo: {
+      handler(newValue) {
+        console.log(newValue);
+        this.$nextTick(() => {
+          const chart1 = echarts.init(this.$refs.chart1, "theme");
+          const chart3 = echarts.init(this.$refs.chart3, "theme");
+          const chart2 = echarts.init(this.$refs.chart2, "theme");
 
-        chart1.setOption({
-          tooltip: {
-            trigger: "axis",
-            axisPointer: {
-              type: "shadow",
-            },
-          },
-          legend: {
-            data: ["Expenses", "Income"],
-          },
-          grid: {
-            left: "3%",
-            right: "4%",
-            bottom: "3%",
-            containLabel: true,
-          },
-          yAxis: [
-            {
-              type: "value",
-            },
-          ],
-          xAxis: [
-            {
-              type: "category",
-              axisTick: {
-                show: false,
+          chart1.setOption({
+            tooltip: {
+              trigger: "axis",
+              axisPointer: {
+                type: "shadow",
               },
-              data: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             },
-          ],
-          series: [
-            {
-              name: "Income",
-              type: "bar",
-              stack: "Total",
-              label: {
-                show: true,
-              },
-              emphasis: {
-                focus: "series",
-              },
-              data: this.resCount,
-              barWidth: "45%",
-              itemStyle: {},
+            legend: {
+              data: ["Expenses", "Income"],
             },
-            {
-              name: "Expenses",
-              type: "bar",
-              stack: "Total",
-              label: {
-                show: true,
-                position: "left",
-              },
-              emphasis: {
-                focus: "series",
-              },
-              data: this.errCount,
-              itemStyle: {},
+            grid: {
+              left: "3%",
+              right: "4%",
+              bottom: "3%",
+              containLabel: true,
             },
-          ],
-        });
-        chart2.setOption({
-          title: {
-            // text: "Basic Radar Chart",
-          },
-          legend: {
-            data: ["Allocated Budget", "Actual Spending"],
-          },
-          radar: {
-            // shape: 'circle',
-            indicator: [
-              { name: "Sales", max: 1 },
-              { name: "Administration", max: 1 },
-              { name: "Information Technology", max: 1 },
-              { name: "Customer Support", max: 1 },
-              { name: "Development", max: 1 },
-              { name: "Ser", max: 1 },
+            yAxis: [
+              {
+                type: "value",
+              },
             ],
-          },
-          series: [
-            {
-              name: "Budget vs spending",
-              type: "radar",
-              data: [
-                {
-                  value: [0.52, 0.8, 0.36, 0.23, 0.65, 0.63],
-                  name: "Allocated Budget",
+            xAxis: [
+              {
+                type: "category",
+                axisTick: {
+                  show: false,
                 },
-                {
-                  value: [0.34, 0.65, 0.98, 0.5, 0.4, 0.52],
-                  name: "Actual Spending",
+                data: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+              },
+            ],
+            series: [
+              {
+                name: "Income",
+                type: "bar",
+                stack: "Total",
+                label: {
+                  show: true,
                 },
+                emphasis: {
+                  focus: "series",
+                },
+                data: this.resCount,
+                barWidth: "45%",
+                itemStyle: {},
+              },
+              {
+                name: "Expenses",
+                type: "bar",
+                stack: "Total",
+                label: {
+                  show: true,
+                  position: "left",
+                },
+                emphasis: {
+                  focus: "series",
+                },
+                data: this.errCount,
+                itemStyle: {},
+              },
+            ],
+          });
+          chart2.setOption({
+            title: {
+              // text: "Basic Radar Chart",
+            },
+            legend: {
+              data: ["Allocated Budget", "Actual Spending"],
+            },
+            radar: {
+              // shape: 'circle',
+              indicator: [
+                { name: "Sales", max: 1 },
+                { name: "Administration", max: 1 },
+                { name: "Information Technology", max: 1 },
+                { name: "Customer Support", max: 1 },
+                { name: "Development", max: 1 },
+                { name: "Ser", max: 1 },
               ],
             },
-          ],
-        });
-        chart3.setOption({
-          title: {
-            text: "Stacked Line",
-          },
-          tooltip: {
-            trigger: "axis",
-          },
-          legend: {
-            data: [
-              "Email",
-              "Union Ads",
-              "Video Ads",
-              "Direct",
-              "Search Engine",
+            series: [
+              {
+                name: "Budget vs spending",
+                type: "radar",
+                data: [
+                  {
+                    value: [0.52, 0.8, 0.36, 0.23, 0.65, 0.63],
+                    name: "Allocated Budget",
+                  },
+                  {
+                    value: [0.34, 0.65, 0.98, 0.5, 0.4, 0.52],
+                    name: "Actual Spending",
+                  },
+                ],
+              },
             ],
-          },
-          grid: {
-            left: "3%",
-            right: "4%",
-            bottom: "3%",
-            containLabel: true,
-          },
-          toolbox: {
-            feature: {
-              saveAsImage: {},
+          });
+          chart3.setOption({
+            title: {
+              text: "Stacked Line",
             },
-          },
-          xAxis: {
-            type: "category",
-            boundaryGap: false,
-            data: ["Sun", "Tue", "Wed", "Thu", "Fri", "Sat", "Mon"],
-          },
-          yAxis: {
-            type: "value",
-          },
-          series: [
-            {
-              name: "Search Engine",
-              type: "line",
-              stack: "Total",
-              data: this.grade,
+            tooltip: {
+              trigger: "axis",
             },
-          ],
+            legend: {
+              data: [
+                "Email",
+                "Union Ads",
+                "Video Ads",
+                "Direct",
+                "Search Engine",
+              ],
+            },
+            grid: {
+              left: "3%",
+              right: "4%",
+              bottom: "3%",
+              containLabel: true,
+            },
+            toolbox: {
+              feature: {
+                saveAsImage: {},
+              },
+            },
+            xAxis: {
+              type: "category",
+              boundaryGap: false,
+              data: ["Sun", "Tue", "Wed", "Thu", "Fri", "Sat", "Mon"],
+            },
+            yAxis: {
+              type: "value",
+            },
+            series: [
+              {
+                name: "Search Engine",
+                type: "line",
+                stack: "Total",
+                data: this.grade,
+              },
+            ],
+          });
         });
-      });
+      },
+      immediate: false,
     },
   },
   methods: {
