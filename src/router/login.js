@@ -16,8 +16,13 @@ const routes = [
     component: () => import('@/components/StudentList.vue')
   },
   {
-    path: '/student',
+    path: '/student/:id',
     name: 'student',
+    props({ params }) {
+      return {
+        id:params.id
+      }
+    },
     component: () => import('@/components/Student.vue')
   },
   {
@@ -38,6 +43,9 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.afterEach((to, from) => {
 })
 
 export default router

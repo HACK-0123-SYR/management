@@ -25,8 +25,6 @@ import {
   TableColumn,
   TabPane,
   Tabs,
-  ElAvatar,
-  //
 } from "element-ui";
 //ele theme
 import "@/style/theme/index.css";
@@ -51,5 +49,8 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  // beforeCreate() {
+  //   this.$bus = this;
+  // },
   render: (h) => h(App),
 }).$mount("#app");
