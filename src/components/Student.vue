@@ -71,8 +71,9 @@
         </div>
       </div>
     </div>
-    <div class="barChart" ref="chart1"></div>
+    
     <div class="radarChart" ref="chart2"></div>
+    <div class="barChart" ref="chart1"></div>
 
     <div class="lineChart" ref="chart3"></div>
     <div class="feedback">

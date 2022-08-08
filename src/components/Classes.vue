@@ -4,6 +4,7 @@
       <el-tab-pane label="我的班级" name="first">
         <div class="style_classListBox__NBMYd">
           <div class="style_listBox__40SsE">
+
             <div class="style_item__BJ73k">
               <div class="style_top__09yUH">
                 <div class="style_left__l5taP">
@@ -43,6 +44,7 @@
                 >
               </div>
             </div>
+
             <div class="style_item__BJ73k">
               <div class="style_top__09yUH">
                 <div class="style_left__l5taP">
