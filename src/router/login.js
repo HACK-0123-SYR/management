@@ -20,7 +20,7 @@ const routes = [
     name: 'student',
     props({ params }) {
       return {
-        id:params.id
+        id: params.id
       }
     },
     component: () => import('@/components/Student.vue')
@@ -34,6 +34,16 @@ const routes = [
     path: '/Classes',
     name: 'classes',
     component: () => import('@/components/Classes.vue')
+  },
+  {
+    path: '/Class/:theClass',
+    name: 'class',
+    props({ params }) {
+      return {
+        theClass: params.theClass
+      }
+    },
+    component: () => import('@/components/Class.vue')
   },
   // {
   //   path: '*',

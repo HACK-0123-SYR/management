@@ -5,7 +5,7 @@
       <MainNav />
 
       <div class="view">
-        <keep-alive :include="['StudentList']">
+        <keep-alive :include="['StudentList','Classes']">
           <router-view></router-view>
         </keep-alive>
       </div>
@@ -19,12 +19,14 @@ import MainHeader from "@/components/MainHeader.vue";
 import MainNav from "@/components/MainNav.vue";
 import { mapActions } from "vuex";
 import StudentList from "./StudentList.vue";
+import Classes from "./Classes.vue"
 
 export default {
   components: {
     MainHeader,
     MainNav,
     StudentList,
+    Classes,
   },
   data() {
     return {

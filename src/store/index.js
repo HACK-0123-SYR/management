@@ -4,13 +4,13 @@ import Vuex from "vuex";
 import { request } from "@/request/index.js";
 
 //theme
-import theme from "@/theme.json";
+// import theme from "@/theme.json";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    theme,
+    // theme,
     teacherInfo: {},
     classMap: new Map(),
     // oneStudentInfo: {},

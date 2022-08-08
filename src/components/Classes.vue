@@ -72,6 +72,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  name:'Classes',
   data() {
     return {
       activeIndex: "1",
@@ -84,7 +85,7 @@ export default {
     },
   },
   computed: {
-    ...mapState("classMap"),
+    ...mapState(["classMap"]),
   },
 };
 </script>
