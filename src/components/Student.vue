@@ -4,13 +4,11 @@
       <i class="iconfont icon-xiangzuo1" @click="back"></i>
     </div>
     <div class="banner">
-      <!-- <div class="icon">
-        <img :src="studentInfo._doc.portrait" />
-      </div> -->
       <div class="info">
-        <div class="name">姓名：{{studentInfo?._doc?.name}}</div>
-        <div class="num">班级：{{studentInfo?._doc?.class}}</div>
+        <div class="name">姓名：{{ studentInfo?._doc?.name }}</div>
+        <div class="num">学号：{{ studentInfo?._doc?.student_id }}</div>
       </div>
+      <!-- <div class="line" style="width:100%"></div> -->
     </div>
     <div class="datas">
       <div class="process">
@@ -39,7 +37,7 @@
                 cx="23"
                 cy="23"
                 r="20"
-                style="stroke: #3fb0decc"
+                style="stroke: #f6e4ff"
               />
             </svg>
           </div>
@@ -72,7 +70,7 @@
                 cx="23"
                 cy="23"
                 r="20"
-                style="stroke: #6de5c3cc"
+                style="stroke: #dce8fb"
               />
             </svg>
           </div>
@@ -80,7 +78,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="barChart" ref="chart1"></div>
 
     <div class="radarChart" ref="chart2"></div>
@@ -96,7 +94,6 @@
 import { mapMutations, mapState } from "vuex";
 //request
 import { request } from "@/request/index.js";
-
 
 export default {
   data() {
@@ -245,9 +242,7 @@ export default {
               trigger: "axis",
             },
             legend: {
-              data: [
-                "Search Engine",
-              ],
+              data: ["Search Engine"],
             },
             grid: {
               left: "3%",
@@ -296,8 +291,8 @@ export default {
         },
       });
       this.studentInfo = res.data.data;
-      this.progress = 45
-      this.rate = 95
+      this.progress = 45;
+      this.rate = 95;
     },
     // ...mapMutations(["DestoryInfo"]),
   },
@@ -331,11 +326,13 @@ export default {
   flex-wrap: wrap;
   & > div {
     margin-top: 30px;
+    box-shadow: 0 5px 10px 0 rgb(50 50 93 / 35%);
   }
   .back-banner {
     height: 15px;
     width: 100%;
     margin-top: 0;
+    box-shadow:none;
     i {
       cursor: pointer;
     }
@@ -353,15 +350,31 @@ export default {
     align-items: center;
     // padding-left: 30px;
     // box-shadow: 0 0 10px 1px rgba(158, 158, 158, 0.482);
+    // border-bottom: 1px solid #a1a1a1;
     .info {
       display: flex;
       align-items: baseline;
       color: #4f4c4c;
+      height: 100%;
+      div {
+        height: 100%;
+        line-height: 40px;
+      }
       .name {
-        margin-left:20px;
+        margin-left: 20px;
         margin-right: 15px;
         display: inline-block;
         font-size: 18px;
+
+        // margin-left: 20px;
+        // margin-right: 15px;
+        // display: inline-block;
+        // font-size: 18px;
+        // background-color: #cfe8fc;
+        // padding: 5px 10px;
+        // box-sizing: content-box;
+        // border-radius: 10px;
+        // color: #8c8c8e;
       }
       .num {
         display: inline-block;
@@ -390,11 +403,14 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-radius: 10px;
+    box-shadow: none;
     .process {
       position: relative;
       height: 48%;
       width: 100%;
-      background-color: rgb(234, 255, 254);
+      // background-color: rgba(225, 254, 245, 1);
+      box-shadow: 0 5px 10px 0 rgb(50 50 93 / 35%);
       border-radius: 10px;
       display: flex;
       .con {
@@ -405,7 +421,7 @@ export default {
         justify-content: center;
         span {
           font-size: 25px;
-          color: #8c8c8e;
+          color: #666666;
           font-weight: bold;
         }
       }
@@ -497,7 +513,7 @@ export default {
   .barChart {
     height: 400px;
     width: 50%;
-    background-color: rgb(243, 249, 255);
+    // background-color: rgb(243, 249, 255);
     border-radius: 10px;
     position: relative;
     // margin:0 auto;
@@ -506,14 +522,14 @@ export default {
     height: 600px;
     width: 100%;
     border-radius: 10px;
-    background-color: aliceblue;
+    // background-color: aliceblue;
     padding: 30px;
     box-sizing: border-box;
   }
   .lineChart {
     height: 400px;
     width: 100%;
-    background-color: rgb(225, 254, 245);
+    // background-color: rgba(225, 254, 245, 0.4);
     border-radius: 20px;
   }
 }
