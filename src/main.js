@@ -25,6 +25,13 @@ import {
   TableColumn,
   TabPane,
   Tabs,
+
+  Dialog,
+  Form,
+  FormItem,
+  Input,
+  Option,
+
 } from "element-ui";
 //ele theme
 import "@/style/theme/index.css";
