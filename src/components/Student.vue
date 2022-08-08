@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-  <div class="back-banner">
+    <div class="back-banner">
       <i class="iconfont icon-xiangzuo1" @click="back"></i>
     </div>
     <div class="datas">
@@ -72,8 +72,9 @@
       </div>
     </div>
     
-    <div class="radarChart" ref="chart2"></div>
     <div class="barChart" ref="chart1"></div>
+
+    <div class="radarChart" ref="chart2"></div>
 
     <div class="lineChart" ref="chart3"></div>
     <div class="feedback">
