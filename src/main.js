@@ -25,13 +25,11 @@ import {
   TableColumn,
   TabPane,
   Tabs,
-
   Dialog,
   Form,
   FormItem,
   Input,
   Option,
-
 } from "element-ui";
 //ele theme
 import "@/style/theme/index.css";
@@ -50,6 +48,13 @@ Vue.component(Table.name, Table);
 Vue.component(TableColumn.name, TableColumn);
 Vue.component(TabPane.name, TabPane);
 Vue.component(Tabs.name, Tabs);
+
+Vue.component(Dialog.name, Dialog);
+Vue.component(Form.name, Form);
+Vue.component(FormItem.name, FormItem);
+Vue.component(Select.name, Select);
+Vue.component(Input.name, Input);
+Vue.component(Option.name, Option);
 
 //echarts
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。

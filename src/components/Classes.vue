@@ -162,7 +162,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name:'Classes',
+  name: "Classes",
   data() {
     return {
       activeIndex: "1",
@@ -260,14 +260,15 @@ export default {
   margin: auto 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
 }
 .buttons {
   float: left;
   min-width: 20px;
   max-width: 200px;
   display: block;
-  margin: auto 0.1em;
+  margin: auto 0;
+  margin-left: 8px !important;
   position: relative;
 }
 
