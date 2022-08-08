@@ -25,6 +25,13 @@ import {
   TableColumn,
   TabPane,
   Tabs,
+
+  Dialog,
+  Form,
+  FormItem,
+  Input,
+  Option,
+
 } from "element-ui";
 //ele theme
 import "@/style/theme/index.css";
@@ -44,6 +51,12 @@ Vue.component(TableColumn.name, TableColumn);
 Vue.component(TabPane.name, TabPane);
 Vue.component(Tabs.name, Tabs);
 
+Vue.component(Dialog.name, Dialog);
+Vue.component(Form.name, Form);
+Vue.component(FormItem.name, FormItem);
+Vue.component(Select.name, Select);
+Vue.component(Input.name, Input);
+Vue.component(Option.name, Option);
 Vue.config.productionTip = false;
 
 new Vue({
