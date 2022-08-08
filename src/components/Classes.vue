@@ -250,7 +250,7 @@ export default {
   margin-top: 4px;
   margin-left: 10px;
   padding: 12px 8px;
-  width: calc(30% -5px);
+  width: calc(30% -git wq5px);
   // background-color: rgb(168, 21, 21);
 }
 
