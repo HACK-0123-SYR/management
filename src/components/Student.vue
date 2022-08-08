@@ -3,6 +3,15 @@
     <div class="back-banner">
       <i class="iconfont icon-xiangzuo1" @click="back"></i>
     </div>
+    <div class="banner">
+      <!-- <div class="icon">
+        <img :src="studentInfo._doc.portrait" />
+      </div> -->
+      <div class="info">
+        <div class="name">姓名：{{studentInfo?._doc?.name}}</div>
+        <div class="num">班级：{{studentInfo?._doc?.class}}</div>
+      </div>
+    </div>
     <div class="datas">
       <div class="process">
         <div class="con"><span>学习进度</span></div>
@@ -30,7 +39,7 @@
                 cx="23"
                 cy="23"
                 r="20"
-                style="stroke: #3fb0de"
+                style="stroke: #3fb0decc"
               />
             </svg>
           </div>
@@ -63,7 +72,7 @@
                 cx="23"
                 cy="23"
                 r="20"
-                style="stroke: #6de5c3"
+                style="stroke: #6de5c3cc"
               />
             </svg>
           </div>
@@ -87,56 +96,19 @@
 import { mapMutations, mapState } from "vuex";
 //request
 import { request } from "@/request/index.js";
-//echarts
-// 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
-import * as echarts from "echarts/core";
-// 引入柱状图图表，图表后缀都为 Chart
-import { BarChart, RadarChart, LineChart } from "echarts/charts";
-// 引入提示框，标题，直角坐标系，数据集，内置数据转换器组件，组件后缀都为 Component
-import {
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  DatasetComponent,
-  TransformComponent,
-  LegendComponent,
-  ToolboxComponent,
-} from "echarts/components";
-// 标签自动布局，全局过渡动画等特性
-import { LabelLayout, UniversalTransition } from "echarts/features";
-// 引入 Canvas 渲染器，注意引入 CanvasRenderer 或者 SVGRenderer 是必须的一步
-import { CanvasRenderer } from "echarts/renderers";
 
-// 注册必须的组件
-echarts.use([
-  TitleComponent,
-  TooltipComponent,
-  GridComponent,
-  DatasetComponent,
-  TransformComponent,
-  LegendComponent,
-  ToolboxComponent,
-
-  BarChart,
-  RadarChart,
-  LineChart,
-
-  LabelLayout,
-  UniversalTransition,
-  CanvasRenderer,
-]);
 
 export default {
   data() {
     return {
-      progress: 65,
-      rate: 45,
+      progress: 0,
+      rate: 0,
       studentInfo: {},
     };
   },
   props: ["id"],
   computed: {
-    ...mapState(["theme"]),
+    // ...mapState(["theme"]),
     // ...mapState(["oneStudentInfo", "oneStudentWeekStatus", "theme"]),
     resCount() {
       let res = [];
@@ -165,9 +137,9 @@ export default {
       handler(newValue) {
         console.log(newValue);
         this.$nextTick(() => {
-          const chart1 = echarts.init(this.$refs.chart1, "theme");
-          const chart3 = echarts.init(this.$refs.chart3, "theme");
-          const chart2 = echarts.init(this.$refs.chart2, "theme");
+          const chart1 = this.$echarts.init(this.$refs.chart1, "theme");
+          const chart3 = this.$echarts.init(this.$refs.chart3, "theme");
+          const chart2 = this.$echarts.init(this.$refs.chart2, "theme");
 
           chart1.setOption({
             tooltip: {
@@ -274,10 +246,6 @@ export default {
             },
             legend: {
               data: [
-                "Email",
-                "Union Ads",
-                "Video Ads",
-                "Direct",
                 "Search Engine",
               ],
             },
@@ -304,6 +272,7 @@ export default {
               {
                 name: "Search Engine",
                 type: "line",
+                smooth: true,
                 stack: "Total",
                 data: this.grade,
               },
@@ -327,16 +296,19 @@ export default {
         },
       });
       this.studentInfo = res.data.data;
+      this.progress = 45
+      this.rate = 95
     },
     // ...mapMutations(["DestoryInfo"]),
   },
   mounted() {
+    // console.log(this.$bus);
     // if (!this.oneStudentInfo._id) {
     //   this.$router.replace({
     //     name: "studentList",
     //   });
     // }
-    echarts.registerTheme("theme", this.theme);
+    // echarts.registerTheme("theme", this.theme);
     console.log("mounted", this.id);
 
     this.getStuInfo(this.id);
@@ -368,6 +340,50 @@ export default {
       cursor: pointer;
     }
   }
+  .banner {
+    position: relative;
+    // top: -40px;
+    // left: 15px;
+    height: 40px;
+    width: 100%;
+    // background-color: #f1f1f1;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    // padding-left: 30px;
+    // box-shadow: 0 0 10px 1px rgba(158, 158, 158, 0.482);
+    .info {
+      display: flex;
+      align-items: baseline;
+      color: #4f4c4c;
+      .name {
+        margin-left:20px;
+        margin-right: 15px;
+        display: inline-block;
+        font-size: 18px;
+      }
+      .num {
+        display: inline-block;
+        font-size: 14px;
+      }
+    }
+    .icon {
+      height: 60px;
+      width: 60px;
+      // background-color: #f7c5ff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 15px 2px rgb(158, 158, 158);
+      img {
+        display: 100%;
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+      }
+    }
+  }
+
   .datas {
     width: 45%;
     height: 400px;
@@ -442,7 +458,7 @@ export default {
           .base {
             opacity: 0.5;
             circle {
-              stroke: #eeeef0;
+              stroke: #eeeef0bc;
             }
           }
           .loader {

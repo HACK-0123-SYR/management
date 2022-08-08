@@ -15,6 +15,9 @@ import MainPage from '@/components/MainPage.vue'
 	}
 </script>
 <style>
+html,body{
+  user-select: none;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

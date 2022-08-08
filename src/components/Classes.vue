@@ -162,7 +162,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "Classes",
+  name:'Classes',
   data() {
     return {
       activeIndex: "1",
