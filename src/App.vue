@@ -43,4 +43,10 @@ textarea {
   bottom: -5px;
   left: 25px;
 }
+.p{
+  font-size: 15px;
+  display: block;
+  height: 25px;
+  line-height: 25px;
+}
 </style>

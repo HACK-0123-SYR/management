@@ -70,7 +70,7 @@
                 cx="23"
                 cy="23"
                 r="20"
-                style="stroke: #dce8fb"
+                style="stroke: #a6d9fb"
               />
             </svg>
           </div>
@@ -88,10 +88,10 @@
       <div class="title">
         FEEDBACK
 
-        <el-popover placement="bottom" title="反馈" width="200" trigger="hover">
-          <p>点击添加类型来指定需要加强类型</p>
-          <p>在输入框中填写给学生的反馈信息</p>
-          <p>点击提交反git 馈以提交信息</p>
+        <el-popover placement="top" title="反馈" width="250" trigger="hover">
+          <p class="p">点击添加类型来指定需要加强类型</p>
+          <p class="p">在输入框中填写给学生的反馈信息</p>
+          <p class="p">点击提交反馈以提交信息</p>
           <i class="iconfont icon-wenhao" slot="reference"></i>
         </el-popover>
       </div>
@@ -127,7 +127,7 @@
         <el-input type="textarea" v-model="msg" class="input"></el-input>
       </div>
       <div class="button-container">
-        <el-button type="primary" round @click="feedBack" :disabled="sending"
+        <el-button type="primary" plain round @click="feedBack" :disabled="sending"
           >提交反馈</el-button
         >
       </div>
@@ -616,6 +616,9 @@ export default {
       font-size: larger;
       i {
         cursor: pointer;
+        &::before{
+          color: #a6d9fb;
+        }
       }
     }
     .tags {

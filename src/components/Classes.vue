@@ -125,6 +125,85 @@
           </div>
         </div>
 
+        <div class="style_item__BJ73k">
+          <div class="style_top__09yUH">
+            <div class="style_left__l5taP">
+              <img
+                src="https://fps.yangcongxueyuan.com/static/media/class1.6ab38f5420877c66d50b.png"
+                width="100%"
+                alt=""
+              />
+            </div>
+            <div class="classIfo">
+              <ul>
+                <li>班级：三年级5班</li>
+                <li>数量：0</li>
+              </ul>
+            </div>
+          </div>
+          <div class="buttonContainer">
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              class="buttons"
+              round
+              plain
+              style="margin-top: 5px"
+              >班级学情</el-button
+            >
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              plain
+              class="buttons"
+              round
+              style="margin-top: 5px"
+              >删除班级</el-button
+            >
+          </div>
+        </div>
+        <div class="style_item__BJ73k">
+          <div class="style_top__09yUH">
+            <div class="style_left__l5taP">
+              <img
+                src="https://fps.yangcongxueyuan.com/static/media/class1.6ab38f5420877c66d50b.png"
+                width="100%"
+                alt=""
+              />
+            </div>
+            <div class="classIfo">
+              <ul>
+                <li>班级：三年级5班</li>
+                <li>数量：0</li>
+              </ul>
+            </div>
+          </div>
+          <div class="buttonContainer">
+            <el-button
+              type="primary"
+              icon="el-icon-edit"
+              size="mini"
+              class="buttons"
+              round
+              plain
+              style="margin-top: 5px"
+              >班级学情</el-button
+            >
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              plain
+              class="buttons"
+              round
+              style="margin-top: 5px"
+              >删除班级</el-button
+            >
+          </div>
+        </div>
+
         <div class="addClass">
           <!-- <img src="../assets/UI/person/24gl-userGroupPlus.png" /> -->
           <img
@@ -224,7 +303,8 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  // justify-content: space-between;
+  padding: 10px 0;
 }
 
 // 班级卡片 一整张
@@ -234,16 +314,12 @@ export default {
   box-shadow: 0 5px 10px 0 rgb(50 50 93 / 35%);
   display: flex;
   flex-direction: column;
-
   float: left;
-  height: 120px;
-  // margin-bottom: 5px;
-  // margin-top: 4px;
-  // margin-left: 2%;
-  margin: 5px 5px;
-  padding: 12px 8px;
-  width: calc(30% - 5px);
-  // background-color: rgb(168, 21, 21);
+  height: 140px;
+  margin: 10px 1%;
+  padding: 12px;
+  box-sizing: border-box;
+  width: calc(31% - 0px);
 }
 
 // 班级卡片 上半部分
@@ -291,9 +367,11 @@ export default {
 
 .addClass {
   position: relative;
-  width: calc(30% - 5px);
-  margin: 5px 5px;
-  height: 150px;
+  height: 140px;
+  margin: 10px 1%;
+  padding: 12px;
+  box-sizing: border-box;
+  width: calc(31% - 0px);
   // border: #000 solid 1px;
   // margin: 10px 0 0 80px;
   overflow: hidden;
