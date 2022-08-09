@@ -35,6 +35,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Message,
+  Popover,
 } from "element-ui";
 //ele theme
 import "@/style/theme/index.css";
@@ -58,6 +59,7 @@ Vue.component(Dropdown.name, Dropdown);
 Vue.component(DropdownMenu.name, DropdownMenu);
 Vue.component(DropdownItem.name, DropdownItem);
 // beforeCreate --> Vue.prototype.$message = Message;
+Vue.component(Popover.name, Popover);
 
 Vue.component(Dialog.name, Dialog);
 Vue.component(Form.name, Form);

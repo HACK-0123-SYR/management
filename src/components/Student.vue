@@ -85,7 +85,16 @@
 
     <div class="lineChart" ref="chart3"></div>
     <div class="feedback">
-      <div class="title">FEEDBACK</div>
+      <div class="title">
+        FEEDBACK
+
+        <el-popover placement="bottom" title="反馈" width="200" trigger="hover">
+          <p>点击添加类型来指定需要加强类型</p>
+          <p>在输入框中填写给学生的反馈信息</p>
+          <p>点击提交反馈以提交信息</p>
+          <i class="iconfont icon-wenhao" slot="reference"></i>
+        </el-popover>
+      </div>
       <div class="tags">
         <span class="strengthen">加强类型：</span>
         <el-tag
@@ -605,6 +614,9 @@ export default {
       padding: 0 20px;
       font-weight: bolder;
       font-size: larger;
+      i {
+        cursor: pointer;
+      }
     }
     .tags {
       padding: 10px 5px;
