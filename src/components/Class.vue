@@ -32,10 +32,10 @@ export default {
   props: ["theClass"],
   watch: {
     classStatus(newValue) {
-      const lineChart = this.$echarts.init(this.$refs.lineChart);
+      const lineChart = this.$echarts.init(this.$refs.lineChart, "theme");
       lineChart.setOption({
         title: {
-          text: "Stacked Line",
+          text: " 班级平均成绩",
         },
         tooltip: {
           trigger: "axis",
@@ -73,65 +73,37 @@ export default {
         ],
       });
 
-      const piechart = this.$echarts.init(this.$refs.pieChart);
+      const piechart = this.$echarts.init(this.$refs.pieChart,'theme');
       piechart.setOption({
-        // backgroundColor: "#2c343c",
         title: {
-          text: "Customized Pie",
-          left: "center",
-          top: 20,
-          textStyle: {
-            color: "#ccc",
-          },
+          text: " 班级错题情况",
         },
-        tooltip: {
-          trigger: "item",
+        legend: {
+          top: "bottom",
         },
-        visualMap: {
-          show: false,
-          min: 80,
-          max: 600,
-          inRange: {
-            colorLightness: [0, 1],
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: { show: true },
           },
         },
         series: [
           {
-            name: "Access From",
+            name: "Nightingale Chart",
             type: "pie",
-            radius: "55%",
+            radius: [50, 250],
             center: ["50%", "50%"],
-            data: [
-              { value: 335, name: "Direct" },
-              { value: 310, name: "Email" },
-              { value: 274, name: "Union Ads" },
-              { value: 235, name: "Video Ads" },
-              { value: 400, name: "Search Engine" },
-            ].sort(function (a, b) {
-              return a.value - b.value;
-            }),
-            roseType: "radius",
-            label: {
-              color: "rgba(255, 255, 255, 0.3)",
-            },
-            labelLine: {
-              lineStyle: {
-                color: "rgba(255, 255, 255, 0.3)",
-              },
-              smooth: 0.2,
-              length: 10,
-              length2: 20,
-            },
+            roseType: "area",
             itemStyle: {
-              color: "#c23531",
-              shadowBlur: 200,
-              shadowColor: "rgba(0, 0, 0, 0.5)",
+              borderRadius: 8,
             },
-            animationType: "scale",
-            animationEasing: "elasticOut",
-            animationDelay: function (idx) {
-              return Math.random() * 200;
-            },
+            data: [
+              { value: 30, name: "rose 1" },
+              { value: 34, name: "rose 3" },
+              { value: 38, name: "rose 4" },
+              { value: 42, name: "rose 2" },
+              { value: 46, name: "rose 5" },
+            ],
           },
         ],
       });
@@ -187,6 +159,7 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
     // padding-left: 30px;
     // box-shadow: 0 0 10px 1px rgba(158, 158, 158, 0.482);
     .info {
@@ -218,9 +191,11 @@ export default {
         border-radius: 10px;
       }
     }
+    box-shadow: none;
   }
   & > div {
     margin-top: 30px;
+    box-shadow: 0 5px 10px 0 rgb(50 50 93 / 35%);
   }
   .back-banner {
     height: 15px;
@@ -229,18 +204,19 @@ export default {
     i {
       cursor: pointer;
     }
+    box-shadow: none;
   }
   .line-chart {
     height: 400px;
     width: 100%;
-    background-color: rgb(225, 254, 245);
+    // background-color: rgb(225, 254, 245);
     border-radius: 20px;
   }
   .pie-chart {
-    height: 400px;
+    height: 600px;
     width: 100%;
     // background-color: rgba(184, 231, 255, 0.401);
-    background-color: #2c343c;
+    // background-color: #2c343c;
     border-radius: 20px;
   }
 }

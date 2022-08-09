@@ -37,7 +37,7 @@
                 cx="23"
                 cy="23"
                 r="20"
-                style="stroke: #f6e4ff"
+                style="stroke: #c6cfff"
               />
             </svg>
           </div>
@@ -70,7 +70,7 @@
                 cx="23"
                 cy="23"
                 r="20"
-                style="stroke: #a6d9fb"
+                style="stroke: #e8d3ff"
               />
             </svg>
           </div>
@@ -197,6 +197,9 @@ export default {
           const chart2 = this.$echarts.init(this.$refs.chart2, "theme");
 
           chart1.setOption({
+            title:{
+              text:'  做题情况'
+            },
             tooltip: {
               trigger: "axis",
               axisPointer: {
@@ -259,7 +262,7 @@ export default {
           });
           chart2.setOption({
             title: {
-              // text: "Basic Radar Chart",
+              text: "",
             },
             legend: {
               data: ["Allocated Budget", "Actual Spending"],
@@ -609,7 +612,8 @@ export default {
     .title {
       height: 70px;
       width: 100%;
-      background-color: rgb(252, 252, 240);
+      //background-color: rgb(252, 252, 240);
+      border-bottom: 1px solid #f0f0f0;
       line-height: 70px;
       padding: 0 20px;
       font-weight: bolder;
@@ -617,7 +621,7 @@ export default {
       i {
         cursor: pointer;
         &::before{
-          color: #a6d9fb;
+          color: #b6b7e9;
         }
       }
     }
@@ -675,12 +679,12 @@ export default {
       }
     }
     .button-container {
-      margin: 10px auto 0px;
+      margin: 0 auto 0px;
       padding: 10px 0px;
       box-sizing: content-box;
       height: 40px;
       width: calc(100% - 0px);
-      border-top: 1px solid #dcdfe6;
+      //border-top: 1px solid #dcdfe6;
       text-align: center;
     }
   }
