@@ -8,14 +8,15 @@
 <script>
 import Login from "./views/login/index.vue";
 // import Login from './views/login/index.vue'
-import MainPage from '@/components/MainPage.vue'
-  export default {
-		name:'App',
-		components:{ Login,MainPage }
-	}
+import MainPage from "@/components/MainPage.vue";
+export default {
+  name: "App",
+  components: { Login, MainPage },
+};
 </script>
 <style>
-html,body{
+html,
+body {
   user-select: none;
 }
 #app {
@@ -25,5 +26,21 @@ html,body{
   /* text-align: center; */
   color: #2c3e50;
   /* margin-top: 60px; */
+}
+textarea {
+  min-height: 185px !important;
+}
+.reject textarea {
+  border-color: #d94646!important;
+}
+.reject::after {
+  content: "请填写反馈信息";
+  color: #d94646;
+  font-size: 12px;
+  /* line-height: 1; */
+  /* padding-top: 4px; */
+  position: absolute;
+  bottom: -5px;
+  left: 25px;
 }
 </style>

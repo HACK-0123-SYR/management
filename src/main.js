@@ -30,6 +30,11 @@ import {
   FormItem,
   Input,
   Option,
+  Tag,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Message,
 } from "element-ui";
 //ele theme
 import "@/style/theme/index.css";
@@ -48,6 +53,11 @@ Vue.component(Table.name, Table);
 Vue.component(TableColumn.name, TableColumn);
 Vue.component(TabPane.name, TabPane);
 Vue.component(Tabs.name, Tabs);
+Vue.component(Tag.name, Tag);
+Vue.component(Dropdown.name, Dropdown);
+Vue.component(DropdownMenu.name, DropdownMenu);
+Vue.component(DropdownItem.name, DropdownItem);
+// beforeCreate --> Vue.prototype.$message = Message;
 
 Vue.component(Dialog.name, Dialog);
 Vue.component(Form.name, Form);
@@ -107,6 +117,7 @@ new Vue({
   beforeCreate() {
     Vue.prototype.$bus = this;
     Vue.prototype.$echarts = echarts;
+    Vue.prototype.$message = Message;
   },
   render: (h) => h(App),
 }).$mount("#app");

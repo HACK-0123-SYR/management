@@ -86,6 +86,42 @@
     <div class="lineChart" ref="chart3"></div>
     <div class="feedback">
       <div class="title">FEEDBACK</div>
+      <div class="tags">
+        <span class="strengthen">加强类型：</span>
+        <el-tag
+          :key="tag"
+          v-for="tag in dynamicTags"
+          color="#fdfaff"
+          closable
+          :disable-transitions="false"
+          @close="handleClose(tag)"
+        >
+          {{ tag }}
+        </el-tag>
+        <el-dropdown trigger="click" @command="handleSelect">
+          <el-button class="button-new-tag" size="small"
+            >添加类型<i class="el-icon-arrow-down el-icon--right"></i
+          ></el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item
+              v-for="type in types"
+              :key="type.type"
+              :command="type"
+              :disabled="commitTypes.indexOf(type.type) != -1"
+            >
+              {{ type.content }}
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+      <div class="content" :class="{ reject: reject }">
+        <el-input type="textarea" v-model="msg" class="input"></el-input>
+      </div>
+      <div class="button-container">
+        <el-button type="primary" round @click="feedBack" :disabled="sending"
+          >提交反馈</el-button
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -100,7 +136,20 @@ export default {
     return {
       progress: 0,
       rate: 0,
+      types: [
+        { type: 0, content: "type0" },
+        { type: 1, content: "type1" },
+        { type: 2, content: "type2" },
+        { type: 3, content: "type3" },
+      ],
       studentInfo: {},
+      dynamicTags: [],
+
+      reject: false,
+      sending: false,
+      //需要提交
+      msg: "",
+      commitTypes: [],
     };
   },
   props: ["id"],
@@ -279,6 +328,18 @@ export default {
     },
   },
   methods: {
+    handleClose(tag) {
+      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      let { type } = this.types.find((ele) => {
+        return ele.content == tag;
+      });
+      this.commitTypes.splice(this.commitTypes.indexOf(type), 1);
+      // console.log("commitTypes:", this.commitTypes);
+    },
+    handleSelect(type) {
+      this.dynamicTags.push(type.content);
+      this.commitTypes.push(type.type);
+    },
     back() {
       this.$router.back();
     },
@@ -293,6 +354,41 @@ export default {
       this.studentInfo = res.data.data;
       this.progress = 45;
       this.rate = 95;
+    },
+    async feedBack() {
+      this.sending = true;
+      //检验表单
+      if (!this.msg.trim()) {
+        this.reject = true;
+        this.sending = false;
+        return;
+      }
+      this.reject = false;
+      //请求
+      let res = await request({
+        url: "/teacher/feedBack",
+        method: "POST",
+        data: {
+          id: this.studentInfo?._doc?.student_id,
+          commitTypes: this.commitTypes,
+          msg: this.msg,
+        },
+      });
+      console.log(res);
+      //处理feedback回调
+      if (res.data.code == 200) {
+        //success
+        this.msg = "";
+        this.sending = false;
+        this.commitTypes = [];
+        this.dynamicTags = [];
+        this.$message({
+          message: "反馈成功",
+          type: "success",
+        });
+      } else {
+        //
+      }
     },
     // ...mapMutations(["DestoryInfo"]),
   },
@@ -332,7 +428,7 @@ export default {
     height: 15px;
     width: 100%;
     margin-top: 0;
-    box-shadow:none;
+    box-shadow: none;
     i {
       cursor: pointer;
     }
@@ -495,8 +591,9 @@ export default {
   }
 
   .feedback {
+    position: relative;
     width: 100%;
-    height: 320px;
+    // height: vh;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0px 0px 10px 2px rgb(223, 223, 223);
@@ -508,6 +605,68 @@ export default {
       padding: 0 20px;
       font-weight: bolder;
       font-size: larger;
+    }
+    .tags {
+      padding: 10px 5px;
+      padding-left: 18px;
+      // border-bottom: 1px solid rgb(207, 207, 207);
+      // border-bottom: 1px solid rgb(207, 207, 207);
+      .strengthen {
+        font-weight: bold;
+        font-size: 15px;
+        color: #666666;
+      }
+      .el-tag {
+        margin: 0 5px;
+      }
+      .button-new-tag {
+        margin-left: 10px;
+        height: 32px;
+        line-height: 30px;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      .input-new-tag {
+        width: 90px;
+        margin-left: 10px;
+        vertical-align: bottom;
+      }
+      .el-dropdown-link {
+        cursor: pointer;
+        color: #409eff;
+      }
+      .el-icon-arrow-down {
+        font-size: 12px;
+      }
+    }
+    .content {
+      // height: 35vh;
+      width: 100%;
+      position: relative;
+      // background-color: #f7c5ff;
+      display: flex;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      .select {
+        height: 100%;
+        width: 32%;
+        display: flex;
+        flex-direction: column;
+      }
+      .input {
+        height: 100%;
+        position: relative;
+        // background-color: #f7c5ff;
+      }
+    }
+    .button-container {
+      margin: 10px auto 0px;
+      padding: 10px 0px;
+      box-sizing: content-box;
+      height: 40px;
+      width: calc(100% - 0px);
+      border-top: 1px solid #dcdfe6;
+      text-align: center;
     }
   }
   .barChart {
