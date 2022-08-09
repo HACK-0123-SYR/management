@@ -91,7 +91,7 @@
         <el-popover placement="bottom" title="反馈" width="200" trigger="hover">
           <p>点击添加类型来指定需要加强类型</p>
           <p>在输入框中填写给学生的反馈信息</p>
-          <p>点击提交反馈以提交信息</p>
+          <p>点击提交反git 馈以提交信息</p>
           <i class="iconfont icon-wenhao" slot="reference"></i>
         </el-popover>
       </div>
