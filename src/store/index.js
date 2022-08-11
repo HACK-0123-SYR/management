@@ -64,6 +64,7 @@ export default new Vuex.Store({
         if (res.data.code == 200) {
           //拿到教师所有教课的班级
           commit("THECLASS", res.data.data);
+          return 1
         } else {
           //拿不到
         }

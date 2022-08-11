@@ -1,11 +1,16 @@
 <template>
   <div class="main">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName">
       <el-tab-pane label="我的班级" name="first"></el-tab-pane>
+      <!-- {{classInfo}} -->
     </el-tabs>
     <div class="style_classListBox__NBMYd">
-      <div class="style_listBox__40SsE">
-        <div class="style_item__BJ73k">
+      <div class="style_listBox__40SsE" v-loading="bodyLoading">
+        <div
+          class="style_item__BJ73k"
+          v-for="info in classInfo"
+          :key="info.name"
+        >
           <div class="style_top__09yUH">
             <div class="style_left__l5taP">
               <img
@@ -16,8 +21,8 @@
             </div>
             <div class="classIfo">
               <ul>
-                <li>班级：三年级5班</li>
-                <li>数量：0</li>
+                <li>班级：{{ info.name }}</li>
+                <li>数量：{{ info.count }}</li>
               </ul>
             </div>
           </div>
@@ -30,6 +35,7 @@
               round
               plain
               style="margin-top: 5px"
+              @click="toClass(info)"
               >班级学情</el-button
             >
             <el-button
@@ -40,51 +46,12 @@
               class="buttons"
               round
               style="margin-top: 5px"
+              @click="deleteClass(info)"
               >删除班级</el-button
             >
           </div>
         </div>
-
-        <div class="style_item__BJ73k">
-          <div class="style_top__09yUH">
-            <div class="style_left__l5taP">
-              <img
-                src="https://fps.yangcongxueyuan.com/static/media/class0.304ad61c98fff5d19f50.png"
-                width="100%"
-                alt=""
-              />
-            </div>
-            <div class="classIfo">
-              <ul>
-                <li>班级：三年级5班</li>
-                <li>数量：0</li>
-              </ul>
-            </div>
-          </div>
-          <div class="buttonContainer">
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              size="mini"
-              class="buttons"
-              round
-              plain
-              style="margin-top: 5px"
-              >班级学情</el-button
-            >
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              size="mini"
-              plain
-              class="buttons"
-              round
-              style="margin-top: 5px"
-              >删除班级</el-button
-            >
-          </div>
-        </div>
-
+        <!-- 
         <div class="style_item__BJ73k">
           <div class="style_top__09yUH">
             <div class="style_left__l5taP">
@@ -123,108 +90,39 @@
               >删除班级</el-button
             >
           </div>
-        </div>
-
-        <div class="style_item__BJ73k">
-          <div class="style_top__09yUH">
-            <div class="style_left__l5taP">
-              <img
-                src="https://fps.yangcongxueyuan.com/static/media/class1.6ab38f5420877c66d50b.png"
-                width="100%"
-                alt=""
-              />
-            </div>
-            <div class="classIfo">
-              <ul>
-                <li>班级：三年级5班</li>
-                <li>数量：0</li>
-              </ul>
-            </div>
-          </div>
-          <div class="buttonContainer">
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              size="mini"
-              class="buttons"
-              round
-              plain
-              style="margin-top: 5px"
-              >班级学情</el-button
-            >
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              size="mini"
-              plain
-              class="buttons"
-              round
-              style="margin-top: 5px"
-              >删除班级</el-button
-            >
-          </div>
-        </div>
-        <div class="style_item__BJ73k">
-          <div class="style_top__09yUH">
-            <div class="style_left__l5taP">
-              <img
-                src="https://fps.yangcongxueyuan.com/static/media/class1.6ab38f5420877c66d50b.png"
-                width="100%"
-                alt=""
-              />
-            </div>
-            <div class="classIfo">
-              <ul>
-                <li>班级：三年级5班</li>
-                <li>数量：0</li>
-              </ul>
-            </div>
-          </div>
-          <div class="buttonContainer">
-            <el-button
-              type="primary"
-              icon="el-icon-edit"
-              size="mini"
-              class="buttons"
-              round
-              plain
-              style="margin-top: 5px"
-              >班级学情</el-button
-            >
-            <el-button
-              type="danger"
-              icon="el-icon-delete"
-              size="mini"
-              plain
-              class="buttons"
-              round
-              style="margin-top: 5px"
-              >删除班级</el-button
-            >
-          </div>
-        </div>
+        </div> -->
 
         <div class="addClass">
           <!-- <img src="../assets/UI/person/24gl-userGroupPlus.png" /> -->
           <img
             src="../assets/UI/person/addc.png"
-            @click="dialogFormVisible = true"
+            @click="function () {
+                dialogFormVisible = true;
+                getClass();
+              }
+            "
           />
           <!-- <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button> -->
           <el-dialog title="添加班级" :visible.sync="dialogFormVisible">
-            <el-form :model="form">
+            <el-form :model="form" v-loading="loading">
               <el-form-item label="班级" :label-width="formLabelWidth">
-                <el-select v-model="form.region" placeholder="请选择班级">
-                  <el-option label="1班" value="c1"></el-option>
-                  <el-option label="2班" value="c2"></el-option>
-                  <el-option label="3班" value="c3"></el-option>
-                  <el-option label="4班" value="c4"></el-option>
+                <el-select v-model="form.choosenClass" placeholder="请选择班级">
+                  <el-option
+                    v-for="c in classes"
+                    :key="c.class"
+                    :label="c.class"
+                    :value="c.class"
+                    :disabled="Boolean(c.teacher_id)"
+                  ></el-option>
                 </el-select>
               </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
               <el-button @click="dialogFormVisible = false">取 消</el-button>
-              <el-button type="primary" @click="dialogFormVisible = false"
+              <el-button
+                type="primary"
+                @click="commitChoose"
+                :disabled="loading"
                 >确 定</el-button
               >
             </div>
@@ -239,37 +137,117 @@
 
 
 <script>
-import { mapState } from "vuex";
+import { request } from "@/request/index.js";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "Classes",
   data() {
     return {
+      activeName: "",
+
+      loading: false,
+      bodyLoading: false,
+
       activeIndex: "1",
       activeIndex2: "1",
       dialogTableVisible: false,
       dialogFormVisible: false,
+
       form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: "",
+        choosenClass: "",
       },
       formLabelWidth: "120px",
-      activeName: "first",
+
+      classes: [],
     };
   },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+    async commitChoose() {
+      if (!this.form.choosenClass) {
+        return this.$message({
+          message: "请选择需要添加的班级",
+          type: "warning",
+        });
+      }
+      this.loading = true;
+      //请求 添加班级
+      let res = await request({
+        url: "/teacher/selectStudent",
+        method: "POST",
+        data: {
+          theClass: this.form.choosenClass,
+        },
+      });
+      console.log(res);
+      if (res.data.code == 200) {
+        this.form.choosenClass = "";
+        if ((await this.getAllClass()) == 1) {
+          this.dialogFormVisible = false;
+          this.loading = false;
+          this.$message({
+            message: "添加成功",
+            type: "success",
+          });
+        }
+      }
     },
+    toClass(info) {
+      console.log(info);
+      this.$router.push({
+        name: "class",
+        params: {
+          theClass: info.name,
+        },
+      });
+    },
+    async getClass() {
+      this.loading = true;
+      const res = await request({
+        url: "/teacher/getClasses",
+        method: "POST",
+      });
+      if (res.data.code == 200) {
+        this.classes = res.data.data;
+        this.loading = false;
+      }
+    },
+    async deleteClass({ name }) {
+      this.bodyLoading = true;
+      const res = await request({
+        url: "/teacher/deleteClass",
+        method: "POST",
+        data: {
+          theClass: name,
+        },
+      });
+      if (res.data.code == 200) {
+        if (await this.getAllClass() == 1) {
+          this.bodyLoading = false;
+          this.$message({
+            message: "删除成功",
+            type: "success",
+          });
+        }
+      }
+    },
+    ...mapActions(["getAllClass"]),
   },
   computed: {
     ...mapState(["classMap"]),
+    classInfo() {
+      const arr = [];
+      const iterator = this.classMap.keys();
+      for (let i = iterator.next(); !i.done; i = iterator.next()) {
+        arr.push({
+          name: i.value,
+          count: this.classMap.get(i.value).length,
+        });
+      }
+
+      return arr;
+    },
   },
+  mounted() {},
 };
 </script>
 
