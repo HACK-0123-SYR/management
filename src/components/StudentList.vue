@@ -1,21 +1,29 @@
 <template>
   <div class="wrapper">
-    <div class="main">
-      <el-tabs v-model="activeName" @tab-click="handleClick" style="padding: 0">
+    <div class="main" v-loading="listloading">
+      <el-tabs
+        v-model="activeName"
+        @tab-click="handleClick"
+        style="height: 54px; padding: 0"
+      >
         <el-tab-pane
           :label="c"
           :name="c"
           v-for="c in classSet"
           :key="c"
         ></el-tab-pane>
-     </el-tabs>
+      </el-tabs>
       <el-table
         :data="studentList"
         height="93%"
         style="width: 100%"
         :row-class-name="tableRowClassName"
       >
-        <el-table-column prop="student_id" label="学号" fixed="left"></el-table-column>
+        <el-table-column
+          prop="student_id"
+          label="学号"
+          fixed="left"
+        ></el-table-column>
         <el-table-column prop="name" label="姓名"></el-table-column>
         <el-table-column prop="gender" label="性别"> </el-table-column>
         <el-table-column prop="process" label="学习进度"> </el-table-column>
@@ -36,7 +44,7 @@
 import { mapActions, mapMutations, mapState } from "vuex";
 
 export default {
-  name:'StudentList',
+  name: "StudentList",
   data() {
     return {
       activeName: "",
@@ -44,7 +52,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["classMap"]),
+    ...mapState(["classMap", "listloading"]),
     classSet() {
       let mapIterator = this.classMap.keys();
       let classSet = [];
@@ -55,15 +63,15 @@ export default {
     },
   },
   methods: {
-    feedback(row){
+    feedback(row) {
       // console.log(row);
       // this.getStudentData(row)
       this.$router.push({
-        name:'student',
-        params:{
-          id:row.student_id
-        }
-      })
+        name: "student",
+        params: {
+          id: row.student_id,
+        },
+      });
     },
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex === 1) {
@@ -79,22 +87,32 @@ export default {
     getStudent(theClass) {
       this.studentList = this.classMap.get(theClass);
     },
-    // ...mapActions(["getStudentData"]),
-    // ...mapMutations(["DestoryInfo"])
+    ...mapActions(["getAllClass"]),
+    ...mapMutations(["LOAD"])
   },
   mounted() {
     // this.$nextTick(()=>{
     //   console.log(this.classMap);
     // })
   },
-  beforeRouteEnter(to,from,next){
-    // this.DestoryInfo()
-    // console.log(to);
-    // next((vm)=>{
-    //   vm.DestoryInfo()
-    // })
-    next()
-  }
+  beforeRouteEnter(to, from, next) {
+    if (from.name != "student") {
+      next((vm) => {
+        vm.getAllClass()
+        vm.activeName = ''
+        vm.studentList = []
+      });
+    }
+    next();
+  },
+  // beforeRouteLeave(to,from,next){
+  //   if(to.name != "student"){
+  //     next(vm=>{
+  //       vm.LOAD()
+  //     })
+  //   }
+  //   next()
+  // }
 };
 </script>
 

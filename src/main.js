@@ -122,6 +122,7 @@ new Vue({
     Vue.prototype.$bus = this;
     Vue.prototype.$echarts = echarts;
     Vue.prototype.$message = Message;
+    Vue.prototype.$loading = Loading
   },
   render: (h) => h(App),
 }).$mount("#app");

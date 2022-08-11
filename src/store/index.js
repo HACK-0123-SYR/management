@@ -13,6 +13,7 @@ export default new Vuex.Store({
     // theme,
     teacherInfo: {},
     classMap: new Map(),
+    listloading: true,
     // oneStudentInfo: {},
     // oneStudentWeekStatus: []
   },
@@ -23,8 +24,12 @@ export default new Vuex.Store({
     },
     THECLASS(state, { classSet }) {
       state.classMap = new Map(classSet);
+      state.listloading = false
       // console.log(state.classMap);
     },
+    // LOAD(state){
+    //   state.listloading = true
+    // }
     // CHANGESTU(state, { oneStudentInfo, oneStudentWeekStatus }) {
     //   state.oneStudentInfo = oneStudentInfo
     //   state.oneStudentWeekStatus = oneStudentWeekStatus
@@ -37,7 +42,8 @@ export default new Vuex.Store({
     // }
   },
   actions: {
-    testToken: async ({ commit }) => {
+    testToken: async ({ commit,state }) => {
+      
       try {
         let res = await request({
           url: "/teacher/testToken",
@@ -54,7 +60,8 @@ export default new Vuex.Store({
         console.log(error);
       }
     },
-    getAllClass: async ({ commit }) => {
+    getAllClass: async ({ commit,state }) => {
+      state.listloading = true
       try {
         let res = await request({
           url: "/teacher/getAllClass",

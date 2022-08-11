@@ -4,7 +4,7 @@
       <MainHeader />
       <MainNav />
 
-      <div class="view">
+      <div class="view" ref="view">
         <keep-alive :include="['StudentList','Classes']">
           <router-view></router-view>
         </keep-alive>

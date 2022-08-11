@@ -84,7 +84,7 @@
     <div class="radarChart" ref="chart2"></div>
 
     <div class="lineChart" ref="chart3"></div>
-    <div class="feedback">
+    <div class="feedback" v-loading="sending">
       <div class="title">
         FEEDBACK
 
@@ -127,7 +127,12 @@
         <el-input type="textarea" v-model="msg" class="input"></el-input>
       </div>
       <div class="button-container">
-        <el-button type="primary" plain round @click="feedBack" :disabled="sending"
+        <el-button
+          type="primary"
+          plain
+          round
+          @click="feedBack"
+          :disabled="sending"
           >提交反馈</el-button
         >
       </div>
@@ -143,6 +148,9 @@ import { request } from "@/request/index.js";
 export default {
   data() {
     return {
+      loadingInstance: {},
+
+
       progress: 0,
       rate: 0,
       types: [
@@ -189,152 +197,155 @@ export default {
   },
   watch: {
     studentInfo: {
-      handler(newValue) {
+      async handler(newValue) {
         console.log(newValue);
-        this.$nextTick(() => {
-          const chart1 = this.$echarts.init(this.$refs.chart1, "theme");
-          const chart3 = this.$echarts.init(this.$refs.chart3, "theme");
-          const chart2 = this.$echarts.init(this.$refs.chart2, "theme");
+        this.loadingInstance.close();
+        setTimeout(() => {
+          this.$nextTick(() => {
+            const chart1 = this.$echarts.init(this.$refs.chart1, "theme");
+            const chart3 = this.$echarts.init(this.$refs.chart3, "theme");
+            const chart2 = this.$echarts.init(this.$refs.chart2, "theme");
 
-          chart1.setOption({
-            title:{
-              text:'  做题情况'
-            },
-            tooltip: {
-              trigger: "axis",
-              axisPointer: {
-                type: "shadow",
+            chart1.setOption({
+              title: {
+                text: "  做题情况",
               },
-            },
-            legend: {
-              data: ["Expenses", "Income"],
-            },
-            grid: {
-              left: "3%",
-              right: "4%",
-              bottom: "3%",
-              containLabel: true,
-            },
-            yAxis: [
-              {
-                type: "value",
+              tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                  type: "shadow",
+                },
               },
-            ],
-            xAxis: [
-              {
-                type: "category",
-                axisTick: {
-                  show: false,
-                },
-                data: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+              legend: {
+                data: ["Expenses", "Income"],
               },
-            ],
-            series: [
-              {
-                name: "Income",
-                type: "bar",
-                stack: "Total",
-                label: {
-                  show: true,
-                },
-                emphasis: {
-                  focus: "series",
-                },
-                data: this.resCount,
-                barWidth: "45%",
-                itemStyle: {},
+              grid: {
+                left: "3%",
+                right: "4%",
+                bottom: "3%",
+                containLabel: true,
               },
-              {
-                name: "Expenses",
-                type: "bar",
-                stack: "Total",
-                label: {
-                  show: true,
-                  position: "left",
+              yAxis: [
+                {
+                  type: "value",
                 },
-                emphasis: {
-                  focus: "series",
-                },
-                data: this.errCount,
-                itemStyle: {},
-              },
-            ],
-          });
-          chart2.setOption({
-            title: {
-              text: "",
-            },
-            legend: {
-              data: ["Allocated Budget", "Actual Spending"],
-            },
-            radar: {
-              // shape: 'circle',
-              indicator: [
-                { name: "Sales", max: 1 },
-                { name: "Administration", max: 1 },
-                { name: "Information Technology", max: 1 },
-                { name: "Customer Support", max: 1 },
-                { name: "Development", max: 1 },
-                { name: "Ser", max: 1 },
               ],
-            },
-            series: [
-              {
-                name: "Budget vs spending",
-                type: "radar",
-                data: [
-                  {
-                    value: [0.52, 0.8, 0.36, 0.23, 0.65, 0.63],
-                    name: "Allocated Budget",
+              xAxis: [
+                {
+                  type: "category",
+                  axisTick: {
+                    show: false,
                   },
-                  {
-                    value: [0.34, 0.65, 0.98, 0.5, 0.4, 0.52],
-                    name: "Actual Spending",
+                  data: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                },
+              ],
+              series: [
+                {
+                  name: "Income",
+                  type: "bar",
+                  stack: "Total",
+                  label: {
+                    show: true,
                   },
+                  emphasis: {
+                    focus: "series",
+                  },
+                  data: this.resCount,
+                  barWidth: "45%",
+                  itemStyle: {},
+                },
+                {
+                  name: "Expenses",
+                  type: "bar",
+                  stack: "Total",
+                  label: {
+                    show: true,
+                    position: "left",
+                  },
+                  emphasis: {
+                    focus: "series",
+                  },
+                  data: this.errCount,
+                  itemStyle: {},
+                },
+              ],
+            });
+            chart2.setOption({
+              title: {
+                text: "",
+              },
+              legend: {
+                data: ["Allocated Budget", "Actual Spending"],
+              },
+              radar: {
+                // shape: 'circle',
+                indicator: [
+                  { name: "Sales", max: 1 },
+                  { name: "Administration", max: 1 },
+                  { name: "Information Technology", max: 1 },
+                  { name: "Customer Support", max: 1 },
+                  { name: "Development", max: 1 },
+                  { name: "Ser", max: 1 },
                 ],
               },
-            ],
-          });
-          chart3.setOption({
-            title: {
-              text: "Stacked Line",
-            },
-            tooltip: {
-              trigger: "axis",
-            },
-            legend: {
-              data: ["Search Engine"],
-            },
-            grid: {
-              left: "3%",
-              right: "4%",
-              bottom: "3%",
-              containLabel: true,
-            },
-            toolbox: {
-              feature: {
-                saveAsImage: {},
+              series: [
+                {
+                  name: "Budget vs spending",
+                  type: "radar",
+                  data: [
+                    {
+                      value: [0.52, 0.8, 0.36, 0.23, 0.65, 0.63],
+                      name: "Allocated Budget",
+                    },
+                    {
+                      value: [0.34, 0.65, 0.98, 0.5, 0.4, 0.52],
+                      name: "Actual Spending",
+                    },
+                  ],
+                },
+              ],
+            });
+            chart3.setOption({
+              title: {
+                text: "Stacked Line",
               },
-            },
-            xAxis: {
-              type: "category",
-              boundaryGap: false,
-              data: ["Sun", "Tue", "Wed", "Thu", "Fri", "Sat", "Mon"],
-            },
-            yAxis: {
-              type: "value",
-            },
-            series: [
-              {
-                name: "Search Engine",
-                type: "line",
-                smooth: true,
-                stack: "Total",
-                data: this.grade,
+              tooltip: {
+                trigger: "axis",
               },
-            ],
+              legend: {
+                data: ["Search Engine"],
+              },
+              grid: {
+                left: "3%",
+                right: "4%",
+                bottom: "3%",
+                containLabel: true,
+              },
+              toolbox: {
+                feature: {
+                  saveAsImage: {},
+                },
+              },
+              xAxis: {
+                type: "category",
+                boundaryGap: false,
+                data: ["Sun", "Tue", "Wed", "Thu", "Fri", "Sat", "Mon"],
+              },
+              yAxis: {
+                type: "value",
+              },
+              series: [
+                {
+                  name: "Search Engine",
+                  type: "line",
+                  smooth: true,
+                  stack: "Total",
+                  data: this.grade,
+                },
+              ],
+            });
           });
-        });
+        }, 500);
       },
       immediate: false,
     },
@@ -413,6 +424,11 @@ export default {
     // }
     // echarts.registerTheme("theme", this.theme);
     console.log("mounted", this.id);
+    // console.log(document.querySelector(''));
+    this.loadingInstance = this.$loading.service({
+      target: ".view",
+      body: true,
+    });
 
     this.getStuInfo(this.id);
   },
@@ -424,6 +440,7 @@ export default {
 
 <style lang="less" scoped>
 .main {
+  position: relative;
   min-height: 100%;
   width: 100%;
   //   background-color: aqua;
@@ -590,7 +607,7 @@ export default {
             stroke-dasharray: calc(2 * 3.1416 * 20);
             transform: rotateZ(-90deg) rotateX(180deg);
             animation-fill-mode: both;
-            transition: stroke-dashoffset 1s ease;
+            transition: stroke-dashoffset 1s ease 0.5s;
             circle {
               stroke: #f7c5ff;
               // stroke-width: 3px;
@@ -620,7 +637,7 @@ export default {
       font-size: larger;
       i {
         cursor: pointer;
-        &::before{
+        &::before {
           color: #b6b7e9;
         }
       }
