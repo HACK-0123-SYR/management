@@ -118,7 +118,7 @@
               :command="type"
               :disabled="commitTypes.indexOf(type.type) != -1"
             >
-              {{ type.content }}
+              {{ type.name }}
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -154,10 +154,6 @@ export default {
       progress: 0,
       rate: 0,
       types: [
-        { type: 0, content: "type0" },
-        { type: 1, content: "type1" },
-        { type: 2, content: "type2" },
-        { type: 3, content: "type3" },
       ],
       studentInfo: {},
       dynamicTags: [],
@@ -354,13 +350,13 @@ export default {
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
       let { type } = this.types.find((ele) => {
-        return ele.content == tag;
+        return ele.name == tag;
       });
       this.commitTypes.splice(this.commitTypes.indexOf(type), 1);
       // console.log("commitTypes:", this.commitTypes);
     },
     handleSelect(type) {
-      this.dynamicTags.push(type.content);
+      this.dynamicTags.push(type.name);
       this.commitTypes.push(type.type);
     },
     back() {
@@ -375,6 +371,8 @@ export default {
         },
       });
       this.studentInfo = res.data.data;
+      this.types = res.data.data.types
+      //
       this.progress = 45;
       this.rate = 95;
     },
