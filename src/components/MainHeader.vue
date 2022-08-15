@@ -5,7 +5,16 @@
         <img :src="teacherInfo.portrait" />
       </div>
       <span class="name"> {{ teacherInfo.name }}</span>
-      <span class="arrow"></span>
+
+      <el-dropdown>
+        <span style="cursor: pointer"
+          ><i class="el-icon-caret-bottom"></i
+        ></span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>个人中心</el-dropdown-item>
+          <el-dropdown-item>退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
       <!-- <span class="other">{{ teacherInfo.email }}</span> -->
     </div>
   </div>
@@ -61,20 +70,20 @@ export default {
       text-overflow: ellipsis;
     }
     .arrow {
-        display: block;
-        float: right;
-        position: relative;
-        top: 2px;
-        right: -10px;
-        height: 0;
-        width: 0;
-        border: 12px solid #7f7f7f;
-        border-bottom: none;
-        border-right-width: 7px;
-        border-left-width: 7px;
-        border-right-color: transparent;
-        border-left-color: transparent;
-      }
+      display: block;
+      float: right;
+      position: relative;
+      top: 2px;
+      right: -10px;
+      height: 0;
+      width: 0;
+      border: 12px solid #7f7f7f;
+      border-bottom: none;
+      border-right-width: 7px;
+      border-left-width: 7px;
+      border-right-color: transparent;
+      border-left-color: transparent;
+    }
   }
 }
 </style>

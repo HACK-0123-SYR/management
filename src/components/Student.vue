@@ -150,11 +150,8 @@ export default {
     return {
       loadingInstance: {},
 
-
       progress: 0,
-      rate: 0,
-      types: [
-      ],
+      types: [],
       studentInfo: {},
       dynamicTags: [],
 
@@ -169,6 +166,19 @@ export default {
   computed: {
     // ...mapState(["theme"]),
     // ...mapState(["oneStudentInfo", "oneStudentWeekStatus", "theme"]),
+    //rate
+    rate() {
+      if (!this.studentInfo.typeStatus) return 0;
+      let t = 0;
+      let f = 0;
+      this.studentInfo.typeStatus.forEach(({ errCount, resCount }) => {
+        t += resCount
+        f += errCount
+      });
+      if(isNaN(t * 100 / (t + f))) return 0
+      return Math.ceil(t * 100 / (t + f));
+    },
+    //bar
     resCount() {
       let res = [];
       this.studentInfo.weekStatus.forEach((ele) => {
@@ -190,11 +200,29 @@ export default {
       });
       return res;
     },
+    //radar
+    indicator() {
+      const arr = [];
+      this.types.forEach((ele) => {
+        arr.push({
+          name: ele.name,
+          max: 1,
+        });
+      });
+      return arr;
+    },
+    radarRates() {
+      const arr = [];
+      this.studentInfo.typeStatus.forEach(({ errCount, resCount }) => {
+        arr.push(resCount / (resCount + errCount));
+      });
+      return arr;
+    },
   },
   watch: {
     studentInfo: {
       async handler(newValue) {
-        console.log(newValue);
+        // console.log(newValue);
         this.loadingInstance.close();
         setTimeout(() => {
           this.$nextTick(() => {
@@ -271,32 +299,25 @@ export default {
                 text: "",
               },
               legend: {
-                data: ["Allocated Budget", "Actual Spending"],
+                data: ["各类型正确率"],
               },
               radar: {
                 // shape: 'circle',
-                indicator: [
-                  { name: "Sales", max: 1 },
-                  { name: "Administration", max: 1 },
-                  { name: "Information Technology", max: 1 },
-                  { name: "Customer Support", max: 1 },
-                  { name: "Development", max: 1 },
-                  { name: "Ser", max: 1 },
-                ],
+                indicator: this.indicator,
               },
               series: [
                 {
-                  name: "Budget vs spending",
+                  // name: "Budget vs spending",
                   type: "radar",
                   data: [
                     {
-                      value: [0.52, 0.8, 0.36, 0.23, 0.65, 0.63],
-                      name: "Allocated Budget",
+                      value: this.radarRates,
+                      name: "各类型正确率",
                     },
-                    {
-                      value: [0.34, 0.65, 0.98, 0.5, 0.4, 0.52],
-                      name: "Actual Spending",
-                    },
+                    // {
+                    //   value: [0.34, 0.65, 0.98, 0.5, 0.4, 0.52],
+                    //   name: "Actual Spending",
+                    // },
                   ],
                 },
               ],
@@ -371,10 +392,9 @@ export default {
         },
       });
       this.studentInfo = res.data.data;
-      this.types = res.data.data.types
+      this.types = res.data.data.types;
       //
       this.progress = 45;
-      this.rate = 95;
     },
     async feedBack() {
       this.sending = true;

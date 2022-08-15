@@ -25,13 +25,20 @@ import { request } from "@/request/index.js";
 export default {
   data() {
     return {
+      loadingInstance: {},
+      loading1: false,
+      loading2: false,
+
       classStatus: [],
+      typeStatus: [],
       count: 0,
     };
   },
   props: ["theClass"],
   watch: {
     classStatus(newValue) {
+      console.log(newValue);
+      this.loading1 = true;
       const lineChart = this.$echarts.init(this.$refs.lineChart, "theme");
       lineChart.setOption({
         title: {
@@ -72,8 +79,11 @@ export default {
           },
         ],
       });
-
-      const piechart = this.$echarts.init(this.$refs.pieChart,'theme');
+    },
+    typeStatus(newValue) {
+      console.log(newValue);
+      this.loading2 = true;
+      const piechart = this.$echarts.init(this.$refs.pieChart, "theme");
       piechart.setOption({
         title: {
           text: " 班级错题情况",
@@ -97,16 +107,19 @@ export default {
             itemStyle: {
               borderRadius: 8,
             },
-            data: [
-              { value: 30, name: "rose 1" },
-              { value: 34, name: "rose 3" },
-              { value: 38, name: "rose 4" },
-              { value: 42, name: "rose 2" },
-              { value: 46, name: "rose 5" },
-            ],
+            data: newValue,
           },
         ],
       });
+    },
+    loading(newValue) {
+      console.log(newValue);
+      if (newValue) this.loadingInstance.close();
+    },
+  },
+  computed: {
+    loading() {
+      return this.loading1 && this.loading2;
     },
   },
   methods: {
@@ -128,11 +141,31 @@ export default {
         //
       }
     },
+    async getClassTypeStatus(theClass) {
+      const res = await request({
+        url: "/teacher/getClassTypeStatus",
+        method: "POST",
+        data: {
+          theClass,
+        },
+      });
+      if (res.data.code == 200) {
+        this.typeStatus = res.data.data;
+      } else {
+        //
+      }
+    },
   },
   mounted() {
+    this.loadingInstance = this.$loading.service({
+      target: ".view",
+      body: true,
+    });
+
     console.log(this.theClass);
     //获取班级总体情况
     this.getClassInfo(this.theClass);
+    this.getClassTypeStatus(this.theClass);
   },
 };
 </script>
