@@ -35,8 +35,12 @@ import {
   DropdownMenu,
   DropdownItem,
   Message,
+  MessageBox,
   Popover,
   Loading,
+  Card,
+  Checkbox,
+  CheckboxGroup,
 } from "element-ui";
 //ele theme
 import "@/style/theme/index.css";
@@ -62,6 +66,9 @@ Vue.component(DropdownItem.name, DropdownItem);
 // beforeCreate --> Vue.prototype.$message = Message;
 Vue.component(Popover.name, Popover);
 Vue.use(Loading.directive)
+Vue.component(Card.name, Card);
+Vue.component(Checkbox.name, Checkbox);
+Vue.component(CheckboxGroup.name, CheckboxGroup);
 
 Vue.component(Dialog.name, Dialog);
 Vue.component(Form.name, Form);
@@ -122,6 +129,7 @@ new Vue({
     Vue.prototype.$bus = this;
     Vue.prototype.$echarts = echarts;
     Vue.prototype.$message = Message;
+    Vue.prototype.$confirm = MessageBox.confirm
     Vue.prototype.$loading = Loading
   },
   render: (h) => h(App),

@@ -30,8 +30,11 @@ body {
 textarea {
   min-height: 185px !important;
 }
+.form-textarea textarea {
+  min-height: 70px !important;
+}
 .reject textarea {
-  border-color: #d94646!important;
+  border-color: #d94646 !important;
 }
 .reject::after {
   content: "请填写反馈信息";
@@ -43,7 +46,7 @@ textarea {
   bottom: -5px;
   left: 25px;
 }
-.p{
+.p {
   font-size: 15px;
   display: block;
   height: 25px;
