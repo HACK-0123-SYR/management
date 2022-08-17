@@ -52,4 +52,8 @@ textarea {
   height: 25px;
   line-height: 25px;
 }
+.add-selection .el-input__inner {
+  height: 40px !important;
+  line-height: 40px !important;
+}
 </style>
