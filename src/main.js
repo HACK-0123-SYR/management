@@ -41,6 +41,8 @@ import {
   Card,
   Checkbox,
   CheckboxGroup,
+  Collapse,
+  CollapseItem,
 } from "element-ui";
 //ele theme
 import "@/style/theme/index.css";
@@ -69,6 +71,8 @@ Vue.use(Loading.directive)
 Vue.component(Card.name, Card);
 Vue.component(Checkbox.name, Checkbox);
 Vue.component(CheckboxGroup.name, CheckboxGroup);
+Vue.component(Collapse.name, Collapse);
+Vue.component(CollapseItem.name, CollapseItem);
 
 Vue.component(Dialog.name, Dialog);
 Vue.component(Form.name, Form);

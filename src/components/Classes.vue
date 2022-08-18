@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <el-tabs v-model="activeName">
-      <el-tab-pane label="我的班级" name="first"></el-tab-pane>
+      <el-tab-pane label="我的班级" name="0"></el-tab-pane>
       <!-- {{classInfo}} -->
     </el-tabs>
     <div class="style_classListBox__NBMYd">
@@ -143,7 +143,7 @@ export default {
   name: "Classes",
   data() {
     return {
-      activeName: "",
+      activeName: "0",
 
       loading: false,
       bodyLoading: false,
