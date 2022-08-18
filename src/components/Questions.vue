@@ -10,7 +10,7 @@
     </el-tabs>
     <div class="main">
       <el-collapse v-model="collapseIndex" accordion v-show="questions.length">
-        <el-collapse-item title="科普" name="1">
+        <el-collapse-item title="科普" name="1" v-show="kepu.length">
           <el-button
             class="btn"
             v-show="questions.length > 0"
@@ -26,16 +26,15 @@
               )
             "
           >
-            
           </el-button>
           <el-card
             class="box-card"
-            v-for="(question, i) in questions"
+            v-for="(question, i) in kepu"
             :key="question._id"
           >
             <div slot="header" class="clearfix">
               <!-- <span>卡片名称</span> -->
-              <div class="class-type">{{ question.ty }}</div>
+              <!-- <div class="class-type">{{ question.ty }}</div> -->
               <el-button
                 style="float: right; padding: 3px 0px 3px 3px"
                 type="text"
@@ -68,11 +67,119 @@
             </div>
           </el-card>
         </el-collapse-item>
-        <el-collapse-item title="普通诈骗" name="2">
-
+        <el-collapse-item title="普通诈骗" name="2" v-show="putongzhapian.length">
+          <el-button
+            class="btn"
+            v-show="questions.length > 0"
+            @click="
+              showDialog(
+                {
+                  contnet: '',
+                  selections: [],
+                  answer: [],
+                  explain: '',
+                },
+                -1
+              )
+            "
+          >
+          </el-button>
+          <el-card
+            class="box-card"
+            v-for="(question, i) in putongzhapian"
+            :key="question._id"
+          >
+            <div slot="header" class="clearfix">
+              <!-- <span>卡片名称</span> -->
+              <!-- <div class="class-type">{{ question.ty }}</div> -->
+              <el-button
+                style="float: right; padding: 3px 0px 3px 3px"
+                type="text"
+                @click="deleteQuestion(question, i)"
+                >移除题目</el-button
+              >
+              <el-button
+                style="float: right; padding: 3px 3px 3px 0px"
+                type="text"
+                @click="showDialog(question, i)"
+                >编辑题目</el-button
+              >
+            </div>
+            <div class="text item content">
+              {{ question.contnet }}
+            </div>
+            <div
+              v-for="(selection, index) in question.selections"
+              :key="selection"
+              class="text item"
+              :class="{ 'right-answer': question.answer.indexOf(index) != -1 }"
+            >
+              {{ alpha[index] }}. {{ selection }}
+            </div>
+            <div class="explain">
+              <div class="text item">题目解析:</div>
+              <div class="text">
+                {{ question.explain ? question.explain : "无" }}
+              </div>
+            </div>
+          </el-card>
         </el-collapse-item>
-        <el-collapse-item title="问答" name="3">
-
+        <el-collapse-item title="问答" name="3" v-show="wenda.length">
+          <el-button
+            class="btn"
+            v-show="questions.length > 0"
+            @click="
+              showDialog(
+                {
+                  contnet: '',
+                  selections: [],
+                  answer: [],
+                  explain: '',
+                },
+                -1
+              )
+            "
+          >
+          </el-button>
+          <el-card
+            class="box-card"
+            v-for="(question, i) in wenda"
+            :key="question._id"
+          >
+            <div slot="header" class="clearfix">
+              <!-- <span>卡片名称</span> -->
+              <!-- <div class="class-type">{{ question.ty }}</div> -->
+              <el-button
+                style="float: right; padding: 3px 0px 3px 3px"
+                type="text"
+                @click="deleteQuestion(question, i)"
+                >移除题目</el-button
+              >
+              <el-button
+                style="float: right; padding: 3px 3px 3px 0px"
+                type="text"
+                @click="showDialog(question, i)"
+                >编辑题目</el-button
+              >
+            </div>
+            <div class="text item content">
+              {{ question.contnet }}
+            </div>
+            <div
+              v-for="(selection, index) in question.selections"
+              :key="selection"
+              class="text item"
+              :class="{ 'right-answer': question.answer.indexOf(index) != -1 }"
+            >
+              {{ alpha[index] }}. {{ selection }}
+            </div>
+            <div class="explain">
+              <div class="text item">题目解析:</div>
+              <div class="text">
+                {{ question.explain ? question.explain : "无" }}
+              </div>
+            </div>
+          </el-card>
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -218,6 +325,17 @@ export default {
       collapseIndex: "-1",
     };
   },
+  computed: {
+    kepu() {
+      return this.questions.filter((ele) => ele.ty == "科普");
+    },
+    putongzhapian() {
+      return this.questions.filter((ele) => ele.ty == "普通诈骗");
+    },
+    wenda() {
+      return this.questions.filter((ele) => ele.ty == "问答");
+    },
+  },
   watch: {
     questionsMap(newValue) {
       // console.log(newValue);
@@ -242,6 +360,7 @@ export default {
       this.questions = this.questionsMap.get(parseInt(index));
       this.type = parseInt(index);
       // console.log(this.questions[0]);
+      this.collapseIndex = '-1'
     },
     async deleteQuestion(question, i) {
       // console.log(question);
@@ -461,7 +580,7 @@ export default {
       position: relative;
       margin: 0 auto;
       display: block;
-      width: calc(100% - 80px);
+      width: 90%;
       height: 60px;
       box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     }

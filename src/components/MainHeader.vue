@@ -6,13 +6,13 @@
       </div>
       <span class="name"> {{ teacherInfo.name }}</span>
 
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <span style="cursor: pointer"
           ><i class="el-icon-caret-bottom"></i
         ></span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人中心</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
+        <el-dropdown-menu>
+          <el-dropdown-item command="center">个人中心</el-dropdown-item>
+          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <!-- <span class="other">{{ teacherInfo.email }}</span> -->
@@ -27,6 +27,28 @@ export default {
   computed: {
     ...mapState(["teacherInfo"]),
   },
+  methods:{
+    handleCommand(command){
+      if(command == 'center'){
+        this.center()
+      }
+      else{
+        this.logout()
+      }
+    },
+    center(){
+      console.log('center');
+    },
+    logout(){
+      console.log("dasfsd");
+      console.log(localStorage.getItem('token'));
+      localStorage.removeItem('token')
+      location.href="asdfasdfasdfasdf"
+      /*
+      eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAxIiwic3RhdHVzIjoidGVhY2hlciIsImlhdCI6MTY1NjgzMTc1NCwiZXhwIjoxODE0NjE5NzU0fQ.XWWoe1qBubqGT_A4FXo_7IwxLxYbLZFZNGPedWtOyQc
+      */
+    }
+  }
 };
 </script>
 
