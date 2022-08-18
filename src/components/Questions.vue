@@ -9,85 +9,70 @@
       ></el-tab-pane>
     </el-tabs>
     <div class="main">
-      <el-button
-        v-show="questions.length > 0"
-        @click="
-          showDialog(
-            {
-              contnet: '',
-              selections: [],
-              answer: [],
-              explain: '',
-            },
-            -1
-          )
-        "
-        >添加题目</el-button
-      >
-
-      <el-card
-        class="box-card"
-        v-for="(question, i) in questions"
-        :key="question._id"
-      >
-        <div slot="header" class="clearfix">
-          <!-- <span>卡片名称</span> -->
-          <div class="class-type">{{ question.ty }}</div>
-          <el-button
-            style="float: right; padding: 3px 0px 3px 3px"
-            type="text"
-            @click="deleteQuestion(question, i)"
-            >移除题目</el-button
-          >
-          <el-button
-            style="float: right; padding: 3px 3px 3px 0px"
-            type="text"
-            @click="showDialog(question, i)"
-            >编辑题目</el-button
-          >
-        </div>
-        <div class="text item content">
-          {{ question.contnet }}
-        </div>
-        <div
-          v-for="(selection, index) in question.selections"
-          :key="selection"
-          class="text item"
-          :class="{ 'right-answer': question.answer.indexOf(index) != -1 }"
-        >
-          {{ alpha[index] }}. {{ selection }}
-        </div>
-        <div class="explain">
-          <div class="text item">题目解析:</div>
-          <div class="text">
-            {{ question.explain ? question.explain : "无" }}
-          </div>
-        </div>
-      </el-card>
-
-      <el-collapse v-model="collapseIndex" accordion>
+      <el-collapse v-model="collapseIndex" accordion v-show="questions.length">
         <el-collapse-item title="科普" name="1">
-          <div>
-            与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；
-          </div>
-          <div>
-            在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。
-          </div>
+          <el-button
+            class="btn"
+            v-show="questions.length > 0"
+            @click="
+              showDialog(
+                {
+                  contnet: '',
+                  selections: [],
+                  answer: [],
+                  explain: '',
+                },
+                -1
+              )
+            "
+          >
+            
+          </el-button>
+          <el-card
+            class="box-card"
+            v-for="(question, i) in questions"
+            :key="question._id"
+          >
+            <div slot="header" class="clearfix">
+              <!-- <span>卡片名称</span> -->
+              <div class="class-type">{{ question.ty }}</div>
+              <el-button
+                style="float: right; padding: 3px 0px 3px 3px"
+                type="text"
+                @click="deleteQuestion(question, i)"
+                >移除题目</el-button
+              >
+              <el-button
+                style="float: right; padding: 3px 3px 3px 0px"
+                type="text"
+                @click="showDialog(question, i)"
+                >编辑题目</el-button
+              >
+            </div>
+            <div class="text item content">
+              {{ question.contnet }}
+            </div>
+            <div
+              v-for="(selection, index) in question.selections"
+              :key="selection"
+              class="text item"
+              :class="{ 'right-answer': question.answer.indexOf(index) != -1 }"
+            >
+              {{ alpha[index] }}. {{ selection }}
+            </div>
+            <div class="explain">
+              <div class="text item">题目解析:</div>
+              <div class="text">
+                {{ question.explain ? question.explain : "无" }}
+              </div>
+            </div>
+          </el-card>
         </el-collapse-item>
         <el-collapse-item title="普通诈骗" name="2">
-          <div>
-            控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；
-          </div>
-          <div>页面反馈：操作后，通过页面元素的变化清晰地展现当前状态。</div>
+
         </el-collapse-item>
         <el-collapse-item title="问答" name="3">
-          <div>简化流程：设计简洁直观的操作流程；</div>
-          <div>
-            清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策；
-          </div>
-          <div>
-            帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担。
-          </div>
+
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -472,15 +457,28 @@ export default {
     z-index: 0;
     top: 74px;
     padding-bottom: 20px;
-    .el-collapse-item{
-      .el-collapse-item__header{
+    .btn {
+      position: relative;
+      margin: 0 auto;
+      display: block;
+      width: calc(100% - 80px);
+      height: 60px;
+      box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    }
+    .el-collapse-item {
+      .el-collapse-item__header {
         font-size: 15px;
       }
     }
+    .is-active {
+      border: 1px solid #ebeef5;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
     .box-card {
       position: relative;
-      margin: 0 auto;
-      margin-top: 30px;
+      margin: 30px auto;
       width: 90%;
       .clearfix {
         .class-type {

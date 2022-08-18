@@ -14,7 +14,7 @@ export default {
   components: { Login, MainPage },
 };
 </script>
-<style>
+<style lang="less">
 html,
 body {
   user-select: none;
@@ -59,26 +59,37 @@ textarea {
 .el-collapse {
   border: none !important;
 }
-.el-collapse-item__header {
-  font-size: 20px !important;
-  height: 80px !important;
-  font-weight: bolder !important;
-  margin-bottom: 20px;
-  border: 1px solid #ebeef5 !important;
-  border-radius: 10px !important;
-  background-color: rgb(249, 249, 249) !important;
-  
-}
-.el-collapse-item__header::before {
-  content: "\e711";
-  font-family: "iconfont" !important;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 25px;
-  -webkit-font-smoothing: antialiased;
-  padding: 0 20px;
-  padding-right: 15px;
-  color: #4e09ba;
-}
+.el-collapse-item {
+  .el-collapse-item__header {
+    font-size: 20px !important;
+    height: 80px !important;
+    font-weight: bolder !important;
+    margin-bottom: 20px;
+    border: 1px solid #ebeef5 !important;
+    border-radius: 10px !important;
+    background-color: rgb(249, 249, 249) !important;
+    &::before {
+      content: "\e600";
 
+      font-family: "iconfont" !important;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 25px;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 20px;
+      padding-right: 15px;
+      color: #4e09ba;
+    }
+  }
+  &:nth-child(2) {
+    .el-collapse-item__header::before {
+      content: "\e653";
+    }
+  }
+  &:nth-child(3) {
+    .el-collapse-item__header::before {
+      content: "\e711";
+    }
+  }
+}
 </style>
