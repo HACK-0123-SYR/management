@@ -21,34 +21,38 @@
 </template>
 
 <script>
+import router from "@/router/login";
 import { mapState } from "vuex";
 
 export default {
   computed: {
     ...mapState(["teacherInfo"]),
   },
-  methods:{
-    handleCommand(command){
-      if(command == 'center'){
-        this.center()
-      }
-      else{
-        this.logout()
+  methods: {
+    handleCommand(command) {
+      if (command == "center") {
+        this.center();
+      } else {
+        this.logout();
       }
     },
-    center(){
-      console.log('center');
+    center() {
+      console.log("center");
+      router.push({
+        name: "personal",
+      });
+      this.$bus.$emit("off");
     },
-    logout(){
+    logout() {
       console.log("dasfsd");
-      console.log(localStorage.getItem('token'));
-      localStorage.removeItem('token')
-      location.href="asdfasdfasdfasdf"
+      console.log(localStorage.getItem("token"));
+      localStorage.removeItem("token");
+      location.href = "asdfasdfasdfasdf";
       /*
       eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAxIiwic3RhdHVzIjoidGVhY2hlciIsImlhdCI6MTY1NjgzMTc1NCwiZXhwIjoxODE0NjE5NzU0fQ.XWWoe1qBubqGT_A4FXo_7IwxLxYbLZFZNGPedWtOyQc
       */
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -43,6 +43,10 @@ import {
   CheckboxGroup,
   Collapse,
   CollapseItem,
+
+  Descriptions,
+  DescriptionsItem,
+
 } from "element-ui";
 //ele theme
 import "@/style/theme/index.css";
@@ -80,7 +84,8 @@ Vue.component(FormItem.name, FormItem);
 Vue.component(Select.name, Select);
 Vue.component(Input.name, Input);
 Vue.component(Option.name, Option);
-
+Vue.component(DescriptionsItem.name, DescriptionsItem);
+Vue.component(Descriptions.name, Descriptions);
 //echarts
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
 import * as echarts from "echarts/core";

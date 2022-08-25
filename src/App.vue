@@ -89,6 +89,7 @@ textarea {
   &:nth-child(3) {
     .el-collapse-item__header::before {
       content: "\e711";
+      color: #31007f;
     }
   }
 }

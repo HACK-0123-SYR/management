@@ -45,6 +45,11 @@ const routes = [
     },
     component: () => import('@/components/Class.vue')
   },
+  {
+    path: '/Personal',
+    name: 'personal',
+    component: () => import('@/components/Personal.vue')
+  }
   // {
   //   path: '*',
   //   redirect: '/'
