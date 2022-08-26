@@ -172,11 +172,11 @@ export default {
       let t = 0;
       let f = 0;
       this.studentInfo.typeStatus.forEach(({ errCount, resCount }) => {
-        t += resCount
-        f += errCount
+        t += resCount;
+        f += errCount;
       });
-      if(isNaN(t * 100 / (t + f))) return 0
-      return Math.ceil(t * 100 / (t + f));
+      if (isNaN((t * 100) / (t + f))) return 0;
+      return Math.ceil((t * 100) / (t + f));
     },
     //bar
     resCount() {
@@ -434,6 +434,7 @@ export default {
     // ...mapMutations(["DestoryInfo"]),
   },
   mounted() {
+    this.$bus.$emit("off");
     // console.log(this.$bus);
     // if (!this.oneStudentInfo._id) {
     //   this.$router.replace({

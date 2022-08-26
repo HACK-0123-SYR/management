@@ -41,7 +41,7 @@ export default {
       router.push({
         name: "personal",
       });
-      this.$bus.$emit("off");
+      
     },
     logout() {
       console.log("dasfsd");

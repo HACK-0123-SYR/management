@@ -157,6 +157,7 @@ export default {
     },
   },
   mounted() {
+    this.$bus.$emit("off");
     this.loadingInstance = this.$loading.service({
       target: ".view",
       body: true,

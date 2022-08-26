@@ -104,6 +104,7 @@ export default {
     ...mapState(["teacherInfo"]),
   },
   mounted() {
+    this.$bus.$emit("off");
     this.info = {
       ...this.teacherInfo,
     };
