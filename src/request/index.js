@@ -1,6 +1,7 @@
 import axios from "axios";
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
+import { Message } from 'element-ui';
 
 // 发送登录请求，用于接收用户信息
 // 定义好后，在登陆页面使用
@@ -22,6 +23,7 @@ const request = axios.create({
 });
 
 request.interceptors.request.use((config) => {
+
   config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   nprogress.start();
   return config;
@@ -33,6 +35,8 @@ request.interceptors.response.use(
     return res;
   },
   (err) => {
+    Message.error(err.message)
+    nprogress.done();
     console.log(err);
     return {
       data: {

@@ -26,6 +26,7 @@
               )
             "
           >
+            添加题目
           </el-button>
           <el-card
             class="box-card"
@@ -83,6 +84,7 @@
               )
             "
           >
+            添加题目
           </el-button>
           <el-card
             class="box-card"
@@ -140,6 +142,7 @@
               )
             "
           >
+            添加题目
           </el-button>
           <el-card
             class="box-card"

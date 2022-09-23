@@ -49,11 +49,11 @@ const routes = [
     path: '/Personal',
     name: 'personal',
     component: () => import('@/components/Personal.vue')
+  },
+  {
+    path: '*',
+    redirect: '/studentList'
   }
-  // {
-  //   path: '*',
-  //   redirect: '/'
-  // }
 ]
 
 const router = new VueRouter({

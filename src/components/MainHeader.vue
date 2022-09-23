@@ -44,10 +44,10 @@ export default {
       
     },
     logout() {
-      console.log("dasfsd");
-      console.log(localStorage.getItem("token"));
+      // console.log("dasfsd");
+      // console.log(localStorage.getItem("token"));
       localStorage.removeItem("token");
-      location.href = "asdfasdfasdfasdf";
+      location.href = "/";
       /*
       eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjAxIiwic3RhdHVzIjoidGVhY2hlciIsImlhdCI6MTY1NjgzMTc1NCwiZXhwIjoxODE0NjE5NzU0fQ.XWWoe1qBubqGT_A4FXo_7IwxLxYbLZFZNGPedWtOyQc
       */

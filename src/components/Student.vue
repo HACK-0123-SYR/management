@@ -86,7 +86,7 @@
     <div class="lineChart" ref="chart3"></div>
     <div class="feedback" v-loading="sending">
       <div class="title">
-        FEEDBACK
+        教师反馈
 
         <el-popover placement="top" title="反馈" width="250" trigger="hover">
           <p class="p">点击添加类型来指定需要加强类型</p>
@@ -241,7 +241,7 @@ export default {
                 },
               },
               legend: {
-                data: ["Expenses", "Income"],
+                data: ["错误数", "正确数"],
               },
               grid: {
                 left: "3%",
@@ -260,12 +260,12 @@ export default {
                   axisTick: {
                     show: false,
                   },
-                  data: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                  data: ["日", "一", "二", "三", "四", "五", "六"],
                 },
               ],
               series: [
                 {
-                  name: "Income",
+                  name: "正确数",
                   type: "bar",
                   stack: "Total",
                   label: {
@@ -279,7 +279,7 @@ export default {
                   itemStyle: {},
                 },
                 {
-                  name: "Expenses",
+                  name: "错误数",
                   type: "bar",
                   stack: "Total",
                   label: {
@@ -324,13 +324,13 @@ export default {
             });
             chart3.setOption({
               title: {
-                text: "Stacked Line",
+                text: "分数变化",
               },
               tooltip: {
                 trigger: "axis",
               },
               legend: {
-                data: ["Search Engine"],
+                data: ["分 数"],
               },
               grid: {
                 left: "3%",
@@ -346,14 +346,14 @@ export default {
               xAxis: {
                 type: "category",
                 boundaryGap: false,
-                data: ["Sun", "Tue", "Wed", "Thu", "Fri", "Sat", "Mon"],
+                data: ["日", "二", "三", "四", "五", "六", "一"],
               },
               yAxis: {
                 type: "value",
               },
               series: [
                 {
-                  name: "Search Engine",
+                  name: "分 数",
                   type: "line",
                   smooth: true,
                   stack: "Total",
@@ -391,10 +391,12 @@ export default {
           id,
         },
       });
+      console.log(res);
+      
       this.studentInfo = res.data.data;
       this.types = res.data.data.types;
       //
-      this.progress = 45;
+      this.progress = res.data.data.process;
     },
     async feedBack() {
       this.sending = true;
@@ -450,6 +452,7 @@ export default {
     });
 
     this.getStuInfo(this.id);
+    
   },
   beforeDestroy() {
     // this.DestoryInfo()

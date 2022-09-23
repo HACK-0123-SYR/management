@@ -44,17 +44,17 @@
             size="mini"
           ></el-input>
         </el-form-item>
-        <el-form-item label="密 码" prop="pass">
+        <!-- <el-form-item label="密 码" prop="pass">
           <el-input
             v-model="info.name"
             placeholder="请输入内容"
             size="mini"
             disabled="true"
           ></el-input>
-        </el-form-item>
-        <el-form-item label="所授班级" prop="class">
+        </el-form-item> -->
+        <!-- <el-form-item label="所授班级" prop="class">
           <el-tag size="small">A1</el-tag>
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
     </div>
 
@@ -63,10 +63,9 @@
         <img
           class="user-portrait"
           alt=""
-          src="https://cosplay.yangcong345.com/default_avatars/student_default_male.png"
+          :src="info.portrait"
         />
 
-        <span>aa</span>
       </div>
 
       <div class="userNav">

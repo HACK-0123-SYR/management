@@ -55,6 +55,7 @@ export default new Vuex.Store({
         } else {
           //token验证失败 需要跳转
           //返回跳转标志
+          return location.href = "/";
         }
       } catch (error) {
         console.log(error);
